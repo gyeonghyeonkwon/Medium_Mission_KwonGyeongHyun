@@ -1,4 +1,4 @@
-package com.ll.medium_misson.domain.home.home.contoller;
+package com.ll.medium_misson.domain.home.home.HomeContoller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
