@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 회원가입 컨트롤러
+ *  Member 컨트롤러
  */
 @Controller
 @RequiredArgsConstructor
@@ -20,12 +20,20 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    /**
+     * 로그인 페이지
+     */
     @GetMapping("/login")
     public String loginPage() {
 
         return "domain/home/home/login";
     }
 
+    @GetMapping("/join")
+    public String joinPage() {
+
+        return "domain/home/home/join";
+    }
 
     /**
      * 회원 가입 페이지 처리
