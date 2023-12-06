@@ -43,7 +43,7 @@ public class MemberController {
      */
 
     @PostMapping("/join")
-    public String loginPage(@Valid MemberUserCreateForm memberUserCreateForm, BindingResult bindingResult) {
+    public String joinPage(@Valid MemberUserCreateForm memberUserCreateForm, BindingResult bindingResult) {
 
         if (!memberUserCreateForm.getPassword().equals(memberUserCreateForm.getPasswordConfirm())) {
             bindingResult.rejectValue("PasswordConfirm", "passwordInCorrect",

@@ -16,7 +16,7 @@
             <h2 class="mb-3">Medium 로그인</h2>
 
             <!-- 로그인 폼 -->
-            <form th:action="@{/member/login}" method="post" onsubmit="return submitLoginForm(this);">
+            <form th:action="@{/member/login}" method="post" onsubmit="submitLoginForm(this); return false;">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">
                         사용자ID 또는 비밀번호를 확인해 주세요.
