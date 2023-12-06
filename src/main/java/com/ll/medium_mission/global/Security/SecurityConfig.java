@@ -34,6 +34,9 @@ public class SecurityConfig {
                                 )
                 )
 
+                /**
+                 *  로그인 성공시 디폴트로 "/"
+                 */
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
                         .defaultSuccessUrl("/"));

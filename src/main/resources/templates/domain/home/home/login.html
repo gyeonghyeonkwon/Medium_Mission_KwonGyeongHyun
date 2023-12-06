@@ -16,7 +16,7 @@
             <h2 class="mb-3">게시판 로그인</h2>
 
             <!-- 로그인 폼 -->
-            <form th:action="@{/member/login}" method="post">
+            <form th:action="@{/member/login}" method="post" onsubmit="return submitLoginForm(this);">
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">
                         사용자ID 또는 비밀번호를 확인해 주세요.
@@ -44,3 +44,32 @@
 
 </body>
 </html>
+
+<script>
+    function submitLoginForm(form) {
+        const inputId = form.nickname;
+        const inputPassword = form.password;
+
+        inputId.value = inputId.value.trim();
+        inputPassword.value = inputPassword.value.trim();
+
+        const nickname = inputId.value;
+        const password = inputPassword.value;
+
+        if (nickname.length == 0) {
+            alert('아이디를 입력해주세요.');
+            inputId.focus();
+
+            return;
+        }
+
+        if (password.length == 0) {
+            alert('비밀번호를 입력해주세요.');
+            inputPassword.focus();
+
+            return;
+        }
+
+        form.submit();
+    }
+</script>
