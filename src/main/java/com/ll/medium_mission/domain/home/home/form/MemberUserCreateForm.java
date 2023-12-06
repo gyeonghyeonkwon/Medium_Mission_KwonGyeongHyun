@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class MemberCreateForm {
+public class MemberUserCreateForm {
 
     /**
      * 회원가입할 때 MemberController에 받아올 데이터

@@ -29,7 +29,9 @@ public class MemberSecurityService implements UserDetailsService {
             throw new UsernameNotFoundException("아이디를 찾을수 없습니다.");
         }
         MemberUser memberUser = _memberUser.get();
+
         List<GrantedAuthority> authorities = new ArrayList<>();
+
         if ("admin".equals(nickname)) {
             authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
         } else {

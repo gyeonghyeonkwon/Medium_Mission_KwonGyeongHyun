@@ -1,7 +1,7 @@
 package com.ll.medium_mission.domain.home.home.Contoller;
 
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
-import com.ll.medium_mission.domain.home.home.form.MemberCreateForm;
+import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,7 @@ public class MemberController {
      * 회원가입 페이지
      */
     @GetMapping("/join")
-    public String joinPage() {
+    public String joinPage(MemberUserCreateForm memberUserCreateForm) {
 
         return "domain/home/home/join";
     }
@@ -43,11 +43,13 @@ public class MemberController {
      */
 
     @PostMapping("/join")
-    public String loginPage(@Valid MemberCreateForm memberCreateForm, BindingResult bindingResult) {
+    public String loginPage(@Valid MemberUserCreateForm memberUserCreateForm, BindingResult bindingResult) {
 
-        if (!memberCreateForm.getPassword().equals(memberCreateForm.getPasswordConfirm())) {
+        if (!memberUserCreateForm.getPassword().equals(memberUserCreateForm.getPasswordConfirm())) {
             bindingResult.rejectValue("PasswordConfirm", "passwordInCorrect",
                     "입력하신 비밀번호가 일치하지 않습니다.");
+
+            memberService.create(memberUserCreateForm.getUsername() , memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
             return "domain/home/home/join";
         }

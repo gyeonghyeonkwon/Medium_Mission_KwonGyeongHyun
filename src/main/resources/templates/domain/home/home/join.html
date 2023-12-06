@@ -1,1 +1,39 @@
-회원가입 페이지
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <!-- Bootstrap CSS link (you can replace it with your own) -->
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+ <div class="my-3 border-bottom">
+        <div>
+            <h4>회원가입</h4>
+        </div>
+    </div>
+    <form th:action="@{/member/join}" th:object="${memberUserCreateForm}" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">이름</label>
+            <input type="text" th:field="*{username}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="nickname" class="form-label">사용자ID</label>
+            <input type="text" th:field="*{nickname}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" th:field="*{password}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="passwordConfirm" class="form-label">비밀번호 확인</label>
+            <input type="password" th:field="*{passwordConfirm}" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+
+</body>
+</html>
