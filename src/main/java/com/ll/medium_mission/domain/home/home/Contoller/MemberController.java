@@ -20,14 +20,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    /**
-     * 로그인 페이지
-     */
-    @GetMapping("/login")
-    public String loginPage() {
-
-        return "domain/home/home/login";
-    }
 
     /**
      * 회원가입 페이지
@@ -44,16 +36,20 @@ public class MemberController {
 
     @PostMapping("/join")
     public String joinPage(@Valid MemberUserCreateForm memberUserCreateForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "domain/home/home/join";
+        }
+
 
         if (!memberUserCreateForm.getPassword().equals(memberUserCreateForm.getPasswordConfirm())) {
             bindingResult.rejectValue("PasswordConfirm", "passwordInCorrect",
                     "입력하신 비밀번호가 일치하지 않습니다.");
 
-            memberService.create(memberUserCreateForm.getUsername() , memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
-
             return "domain/home/home/join";
         }
-        return "redirect:/";
+        memberService.create(memberUserCreateForm.getUsername() , memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
+
+        return "redirect:domain/home/home/list";
     }
 }
 

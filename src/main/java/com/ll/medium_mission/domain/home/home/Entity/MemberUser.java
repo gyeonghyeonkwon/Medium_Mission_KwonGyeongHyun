@@ -16,10 +16,10 @@ public class MemberUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String username; //이름
 
-    @Column
+    @Column(unique = true)
     private String nickname; //아이디
 
     @Column(unique = true)
@@ -27,3 +27,6 @@ public class MemberUser {
 
 
 }
+
+//ALTER TABLE your_table
+//DROP COLUMN column_to_remove;
