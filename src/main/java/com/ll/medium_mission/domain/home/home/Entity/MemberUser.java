@@ -1,4 +1,4 @@
-package com.ll.medium_misson.domain.home.home.MemberUser;
+package com.ll.medium_mission.domain.home.home.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,14 +17,13 @@ public class MemberUser {
     private Long id;
 
     @Column
-    private String username;
+    private String username; //이름
+
+    @Column
+    private String nickname; //아이디
 
     @Column(unique = true)
-    private String password;
-
-    @Column(unique = true)
-    private String email ;
-
+    private String password; //패스워드
 
 
 }

@@ -1,4 +1,4 @@
-package com.ll.medium_misson;
+package com.ll.medium_mission;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
