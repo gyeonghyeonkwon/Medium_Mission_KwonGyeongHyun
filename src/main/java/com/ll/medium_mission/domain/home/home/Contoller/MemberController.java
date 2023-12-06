@@ -29,6 +29,9 @@ public class MemberController {
         return "domain/home/home/login";
     }
 
+    /**
+     * 회원가입 페이지
+     */
     @GetMapping("/join")
     public String joinPage() {
 
