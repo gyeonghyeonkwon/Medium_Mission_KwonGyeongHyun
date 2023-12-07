@@ -16,17 +16,15 @@ public class MemberUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column
     private String username; //이름
 
     @Column(unique = true)
     private String nickname; //아이디
 
-    @Column(unique = true)
+    @Column
     private String password; //패스워드
 
 
 }
 
-//ALTER TABLE your_table
-//DROP COLUMN column_to_remove;

@@ -23,8 +23,8 @@ public class MemberSecurityService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
-        Optional<MemberUser> _memberUser = this.memberRepository.findByUsername(nickname);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<MemberUser> _memberUser = this.memberRepository.findByUsername(username);
         if (_memberUser.isEmpty()) {
             throw new UsernameNotFoundException("아이디를 찾을수 없습니다.");
         }
@@ -32,7 +32,7 @@ public class MemberSecurityService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if ("admin".equals(nickname)) {
+        if ("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));

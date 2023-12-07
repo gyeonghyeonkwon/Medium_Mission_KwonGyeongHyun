@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -34,4 +36,10 @@ public class MemberService {
 
     }
 
+     public void isNicknameDuplicate(String nickname) {
+        Optional<MemberUser> existingUser = memberRepository.findByNickname(nickname);
+        if (existingUser.isPresent()) {
+            throw new IllegalStateException("이미 존재하는 닉네임입니다.");
+        }
+    }
 }
