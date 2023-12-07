@@ -24,9 +24,9 @@ public class MemberService {
 
         MemberUser user = new MemberUser();
 
-        user.setUsername(username);
+        user.setUsername(username); //이름
 
-        user.setNickname(nickname);
+        user.setNickname(nickname); //아이디
 
         user.setPassword(passwordEncoder.encode(password));
 

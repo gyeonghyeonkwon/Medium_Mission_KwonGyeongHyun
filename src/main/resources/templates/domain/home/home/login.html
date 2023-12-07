@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS link (you can replace it with your own) -->
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/style.css}">
+    <script th:src="@{/js/login.js}"></script>
 </head>
 <body>
 
@@ -45,31 +46,31 @@
 </body>
 </html>
 
-<script>
-    function submitLoginForm(form) {
-        const inputId = form.nickname;
-        const inputPassword = form.password;
+<!--<script>-->
+<!--    function submitLoginForm(form) {-->
+<!--        const inputId = form.nickname;-->
+<!--        const inputPassword = form.password;-->
 
-        inputId.value = inputId.value.trim();
-        inputPassword.value = inputPassword.value.trim();
+<!--        inputId.value = inputId.value.trim();-->
+<!--        inputPassword.value = inputPassword.value.trim();-->
 
-        const nickname = inputId.value;
-        const password = inputPassword.value;
+<!--        const nickname = inputId.value;-->
+<!--        const password = inputPassword.value;-->
 
-        if (nickname.length == 0) {
-            alert('아이디를 입력해주세요.');
-            inputId.focus();
+<!--        if (nickname.length == 0) {-->
+<!--            alert('아이디를 입력해주세요.');-->
+<!--            inputId.focus();-->
 
-            return;
-        }
+<!--            return;-->
+<!--        }-->
 
-        if (password.length == 0) {
-            alert('비밀번호를 입력해주세요.');
-            inputPassword.focus();
+<!--        if (password.length == 0) {-->
+<!--            alert('비밀번호를 입력해주세요.');-->
+<!--            inputPassword.focus();-->
 
-            return;
-        }
+<!--            return;-->
+<!--        }-->
 
-        form.submit();
-    }
-</script>
+<!--        form.submit();-->
+<!--    }-->
+<!--</script>-->
