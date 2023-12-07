@@ -5,6 +5,7 @@ import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -35,11 +36,9 @@ public class MemberService {
         return user;
 
     }
-
-     public void isNicknameDuplicate(String nickname) {
-        Optional<MemberUser> existingUser = memberRepository.findByNickname(nickname);
-        if (existingUser.isPresent()) {
-            throw new IllegalStateException("이미 존재하는 닉네임입니다.");
-        }
+    @Transactional(readOnly = true)
+    public Optional<MemberUser> findByNickname(String nickname) {
+        return memberRepository.findByNickname(nickname);
     }
+
 }
