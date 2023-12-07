@@ -35,11 +35,12 @@ public class SecurityConfig {
                 )
 
                 /**
-                 *  로그인 성공시 디폴트로 "/"
+                 *  로그인 성공시 디폴트로 "/member/list"
                  */
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
-                        .defaultSuccessUrl("/"));
+                        .usernameParameter("nickname") // 기본 user -> id 로 변경
+                        .defaultSuccessUrl("/member/list"));
 
 
 

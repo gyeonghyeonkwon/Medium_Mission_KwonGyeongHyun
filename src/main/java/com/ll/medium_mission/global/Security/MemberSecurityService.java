@@ -21,10 +21,12 @@ public class MemberSecurityService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
-
+    /**
+     * 스프링 시큐리티가 로그인을 하기 위해 사용자 아이디를 찾는다.
+     */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<MemberUser> _memberUser = this.memberRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String nickname) throws UsernameNotFoundException {
+        Optional<MemberUser> _memberUser = this.memberRepository.findByNickname(nickname);
         if (_memberUser.isEmpty()) {
             throw new UsernameNotFoundException("아이디를 찾을수 없습니다.");
         }
@@ -32,7 +34,7 @@ public class MemberSecurityService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if ("admin".equals(username)) {
+        if ("admin".equals(nickname)) {
             authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));

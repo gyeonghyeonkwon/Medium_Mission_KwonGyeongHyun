@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- *  Member 컨트롤러
+ *  회원가입 컨트롤러
  */
 @Controller
 @RequiredArgsConstructor
@@ -55,7 +55,7 @@ public class MemberController {
         }
         catch (DataIntegrityViolationException e) {
 
-            return "domain/home/home/list";
+            return "domain/home/home/join";
         }
     }
 }
