@@ -1,5 +1,8 @@
-
-    function submitLoginForm(form) {
+/**
+ *
+ * 로그인 폼 처리
+ */
+function submitLoginForm(form) {
     const inputId = form.nickname;
     const inputPassword = form.password;
 

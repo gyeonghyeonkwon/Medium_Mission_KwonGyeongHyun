@@ -27,7 +27,7 @@ function submitJoinForm(form) {
         const passwordConfirm = form['passwordConfirm'].value.trim();
 
         if (password !== passwordConfirm) {
-            alert('입력하시 비밀번호가 일치하지않습니다.');
+            alert('입력하신 비밀번호가 일치하지 않습니다.');
             form['password'].focus();
             return;
         }

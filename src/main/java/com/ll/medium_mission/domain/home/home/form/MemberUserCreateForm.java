@@ -16,11 +16,11 @@ public class MemberUserCreateForm {
      */
 
     @NotBlank(message = "이름을 입력해주세요.")
-    @Size(min = 3 , max = 10)
+    @Size(min = 2 , max = 4)
     private String username;
 
     @NotBlank(message = "아이디를 입력해주세요.")
-    @Size(min = 3 , max = 20)
+    @Size(min = 5 , max = 20)
     private String nickname;
 
 

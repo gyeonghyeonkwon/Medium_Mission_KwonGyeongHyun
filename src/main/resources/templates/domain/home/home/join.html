@@ -18,22 +18,29 @@
         </div>
     </div>
     <form th:action="@{/member/join}" th:object="${memberUserCreateForm}" method="post"  onsubmit="submitJoinForm(this); return false;">
+        <!--이름 입력창 글자수 제한-->
         <div class="mb-3">
-
             <label for="username" class="form-label">이름</label>
-            <input type="text" th:field="*{username}" class="form-control">
+            <input type="text" th:field="*{username}" class="form-control" th:attr="minlength=2, maxlength=4">
+            <small class="form-text text-muted">2자 이상, 최대 4자까지 입력 가능합니다.</small>
         </div>
+        <!--아이디 입력창 글자수 제한-->
         <div class="mb-3">
             <label for="nickname" class="form-label">사용자ID</label>
-            <input type="text" th:field="*{nickname}" class="form-control">
+            <input type="text" th:field="*{nickname}" class="form-control" th:attr="minlength=5, maxlength=20">
+            <small class="form-text text-muted">5자 이상, 최대 20자까지 입력 가능합니다.</small>
         </div>
+        <!--비밀번호 입력창 글자수 제한-->
         <div class="mb-3">
             <label for="password" class="form-label">비밀번호</label>
-            <input type="password" th:field="*{password}" class="form-control">
+            <input type="password" th:field="*{password}" class="form-control" th:attr="minlength=3, maxlength=20">
+            <small class="form-text text-muted">3자 이상, 최대 20자까지 입력 가능합니다.</small>
         </div>
+        <!--비밀번호 확인 란 글자수 제한-->
         <div class="mb-3">
             <label for="passwordConfirm" class="form-label">비밀번호 확인</label>
-            <input type="password" th:field="*{passwordConfirm}" class="form-control">
+            <input type="password" th:field="*{passwordConfirm}" class="form-control" th:attr="minlength=3, maxlength=20">
+            <small class="form-text text-muted">3자 이상, 최대 20자까지 입력 가능합니다.</small>
         </div>
 
         <button type="submit" class="btn btn-primary">회원가입</button>
