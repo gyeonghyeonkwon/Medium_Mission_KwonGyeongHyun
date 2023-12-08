@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -36,7 +37,7 @@ public class MemberService {
         return user;
 
     }
-    @Transactional(readOnly = true)
+
     public Optional<MemberUser> findByNickname(String nickname) {
         return memberRepository.findByNickname(nickname);
     }

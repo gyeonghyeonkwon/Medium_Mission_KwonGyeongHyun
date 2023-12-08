@@ -56,7 +56,7 @@ public class MemberController {
             Optional<MemberUser> existingUser = memberService.findByNickname(memberUserCreateForm.getNickname());
             if (existingUser.isPresent()) {
                 // 중복된 닉네임이 이미 존재할 경우 예외 발생
-                throw new DataIntegrityViolationException("이미 존재하는 닉네임입니다.");
+                throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
             }
 
             memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
