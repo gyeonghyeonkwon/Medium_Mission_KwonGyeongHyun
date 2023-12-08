@@ -1,17 +1,13 @@
 package com.ll.medium_mission.domain.home.home.Contoller;
 
-import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
 
 /**
  *  회원가입 컨트롤러
@@ -51,20 +47,16 @@ public class MemberController {
             if (!memberUserCreateForm.getPassword().equals(memberUserCreateForm.getPasswordConfirm())) {
                 throw new IllegalArgumentException("입력하신 비밀번호가 일치하지 않습니다.");
             }
-
             // 사용자 닉네임 중복 확인
-            Optional<MemberUser> existingUser = memberService.findByNickname(memberUserCreateForm.getNickname());
-            if (existingUser.isPresent()) {
-                // 중복된 닉네임이 이미 존재할 경우 예외 발생
-                throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
-            }
+            memberService.findByNickname(memberUserCreateForm);
 
+            //아이디가 중복 되지 않는다면 실행
             memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
             return "domain/home/home/list";
 
         }
-        catch (DataIntegrityViolationException e) {
+        catch (IllegalArgumentException  e) {
 
             return "domain/home/home/join";
         }

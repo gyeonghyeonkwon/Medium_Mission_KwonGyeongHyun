@@ -2,6 +2,7 @@ package com.ll.medium_mission.domain.home.home.Service;
 
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
+import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,19 @@ public class MemberService {
 
     }
 
-    public Optional<MemberUser> findByNickname(String nickname) {
-        return memberRepository.findByNickname(nickname);
+    /**
+     * db에서 저장된 아이디를 찾는다
+     */
+    public void findByNickname(MemberUserCreateForm memberUserCreateForm) {
+        Optional<MemberUser> existingUser = memberRepository.findByNickname(memberUserCreateForm.getNickname());
+
+        if (existingUser.isPresent()) {
+            // 중복된 닉네임이 이미 존재할 경우 예외 발생
+            throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
+        }
     }
 
 }
+
+
+
