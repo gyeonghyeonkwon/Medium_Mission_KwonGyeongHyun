@@ -42,4 +42,4 @@ function submitJoinForm(form) {
  */
 setTimeout(function() {
     document.getElementById('error').style.display = 'none';
-}, 10000);
+}, 5000);

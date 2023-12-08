@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 public class MemberUserCreateForm {
 
     /**
+     * DTO
      * 회원가입할 때 MemberController에 받아올 데이터
      */
 

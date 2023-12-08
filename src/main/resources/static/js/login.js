@@ -26,6 +26,7 @@ function submitLoginForm(form) {
     return;
 }
 
+
     form.submit();
 }
 
