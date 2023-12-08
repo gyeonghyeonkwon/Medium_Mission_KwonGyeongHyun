@@ -31,7 +31,15 @@ function submitJoinForm(form) {
             form['password'].focus();
             return;
         }
+
     }
 
     form.submit();
 }
+
+/**
+ * 아이디 중복메세지 10초간 발생
+ */
+setTimeout(function() {
+    document.getElementById('error').style.display = 'none';
+}, 10000);

@@ -40,14 +40,15 @@ public class MemberService {
     }
 
     /**
-     * db에서 저장된 아이디를 찾는다
+     * db에서 저장된 아이디를 찾아
+     * 중복된 아이디가 있으면 예외를 발생킨다.
      */
     public void findByNickname(MemberUserCreateForm memberUserCreateForm) {
         Optional<MemberUser> existingUser = memberRepository.findByNickname(memberUserCreateForm.getNickname());
 
         if (existingUser.isPresent()) {
             // 중복된 닉네임이 이미 존재할 경우 예외 발생
-            throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
+            throw new IllegalArgumentException("아이디가 존재합니다.");
         }
     }
 

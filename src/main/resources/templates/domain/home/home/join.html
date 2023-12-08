@@ -29,6 +29,9 @@
             <label for="nickname" class="form-label">사용자ID</label>
             <input type="text" th:field="*{nickname}" class="form-control" th:attr="minlength=5, maxlength=20">
             <small class="form-text text-muted">5자 이상, 최대 20자까지 입력 가능합니다.</small>
+            <div id="error" th:text="${error}">
+                <small th:text="${error}"></small>
+            </div>
         </div>
         <!--비밀번호 입력창 글자수 제한-->
         <div class="mb-3">
@@ -50,11 +53,9 @@
 </div>
 </html>
 
-<script th:inline = "javascript">
-    const nickname = document.getElementById("nickname").value;
-    const nickNameCheck = document.getElementById()
-
-
-
-
-</script>
+<!--<script>-->
+<!--    // 10초 후에 메시지를 감춥니다.-->
+<!--    setTimeout(function() {-->
+<!--        document.getElementById('error').style.display = 'none';-->
+<!--    }, 10000);-->
+<!--</script>-->
