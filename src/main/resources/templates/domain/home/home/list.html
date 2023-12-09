@@ -9,7 +9,7 @@
     <link rel="stylesheet" th:href="@{/style.css}">
     <script th:src="@{/js/join.js}"></script>
 </head>
-<div class="container my-3">
+<div class="container my-4">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">게시판</a>
@@ -62,9 +62,11 @@
     <tr th:each="question : ${questionList}">
         <td th:text="${question.id}"></td>
         <td th:text="${question.title}"></td>
-        <td th:text="${question.author.nickname}"></td>
+        <td th:text="${question.author.nickname}"></td>  <!--MemberUser 테이블에 있는 작성자 -->
         <td th:text="${question.createDate}"></td>
     </tr>
     </tbody>
 </table>
-    </div>
+    <a href="/member/write" class="btn btn-primary">글 작성</a>
+
+</div>

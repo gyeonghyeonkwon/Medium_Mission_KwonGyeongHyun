@@ -19,7 +19,7 @@ public class MemberLoginController {
     @GetMapping("/member/login")
     public String loginPage() {
 
-        return "domain/home/home/login";
+        return "/domain/home/home/login";
     }
 
 }

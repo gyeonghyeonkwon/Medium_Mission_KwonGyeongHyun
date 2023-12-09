@@ -15,7 +15,11 @@ public class MemberListController {
     private final QuestionRepository questionRepository;
     @GetMapping("/member/list")
     public String showList(Model model) {
-
+        /**
+         * 게시글 리스트
+         *
+         * 질문 DB 테이블 에 저장되어있는 데이터를 조회 하여 모델 에 저장.
+         */
         List<Question> questionList = this.questionRepository.findAll();
 
         model.addAttribute("questionList" , questionList );
