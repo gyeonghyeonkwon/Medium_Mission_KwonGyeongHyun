@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/style.css}">
     <script th:src="@{/js/join.js}"></script>
 </head>
+<div class="container my-3">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">게시판</a>
@@ -18,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/member/list">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -45,4 +46,25 @@
         </div>
     </div>
 </nav>
-
+</div>
+<div class="container my-3">
+<table class="table">
+    <thead class="table-dark">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성 일시</th>
+        <th>수정 일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question : ${questionList}">
+        <td th:text="${question.id}"></td>
+        <td th:text="${question.title}"></td>
+        <td th:text="${question.author.nickname}"></td>
+        <td th:text="${question.createDate}"></td>
+    </tr>
+    </tbody>
+</table>
+    </div>
