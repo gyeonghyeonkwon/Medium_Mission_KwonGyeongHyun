@@ -9,7 +9,6 @@ public class MemberListController {
     @GetMapping("/member/list")
     public String showList() {
 
-
         return "/domain/home/home/list";
     }
 }
