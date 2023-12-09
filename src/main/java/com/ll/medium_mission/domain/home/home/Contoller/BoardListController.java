@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class MemberListController {
+public class BoardListController {
     private final QuestionRepository questionRepository;
     @GetMapping("/member/list")
     public String showList(Model model) {
