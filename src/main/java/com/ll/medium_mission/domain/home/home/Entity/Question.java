@@ -2,9 +2,9 @@ package com.ll.medium_mission.domain.home.home.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,6 @@ import java.util.List;
  */
 @Entity
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 public class Question {
@@ -39,9 +38,17 @@ public class Question {
     @ManyToOne
     private MemberUser author;
 
-    public Question(Long id, String title, String content) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
+    @Builder
+    public Question(Long id, String title, String content , LocalDateTime createDate , MemberUser author) {
+
+       this.id = id;
+
+       this.title = title;
+
+       this.content = content;
+
+       this.createDate = createDate;
+
+      this.author = author;
     }
 }

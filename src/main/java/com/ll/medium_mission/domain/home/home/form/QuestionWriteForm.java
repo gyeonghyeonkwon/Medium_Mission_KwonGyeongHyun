@@ -1,6 +1,5 @@
 package com.ll.medium_mission.domain.home.home.form;
 
-import com.ll.medium_mission.domain.home.home.Entity.Question;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -26,12 +25,4 @@ public class QuestionWriteForm {
         @Size(min = 10 , max = 30)
         private String content;
 
-        /**
-         *
-         * 글작성 DTO를 Entity로 변환
-         */
-        public Question toEntity() {
-
-                return new Question(id,title,content);
-        }
 }

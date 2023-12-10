@@ -2,7 +2,6 @@ package com.ll.medium_mission.domain.home.home.Service;
 
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
-import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,13 +42,15 @@ public class MemberService {
      * db에서 저장된 아이디를 찾아
      * 중복된 아이디가 있으면 예외를 발생킨다.
      */
-    public void findByNickname(MemberUserCreateForm memberUserCreateForm) {
-        Optional<MemberUser> existingUser = memberRepository.findByNickname(memberUserCreateForm.getNickname());
 
-        if (existingUser.isPresent()) {
-            // 중복된 닉네임이 이미 존재할 경우 예외 발생
-            throw new IllegalArgumentException("아이디가 존재합니다.");
+    public MemberUser getUser(String nickname) {
+
+        Optional<MemberUser> memberUser = memberRepository.findByNickname(nickname);
+
+        if (memberUser.isPresent()) {
+            return memberUser.get();
         }
+        throw new IllegalArgumentException("아이디가 존재합니다.");
     }
 
 }

@@ -59,11 +59,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="question : ${questionList}">
-        <td th:text="${question.id}"></td>
-        <td th:text="${question.title}"></td>
-        <td th:text="${question.author.nickname}"></td>  <!--MemberUser 테이블에 있는 작성자 -->
-        <td th:text="${question.createDate}"></td>
+    <tr th:each="question ,loop : ${questionList}">
+        <td th:text="${loop.count}"></td>
+        <td>
+            <a th:href="@{|/member/detail/${question.id}|}" th:text="${question.title}"></a>
+        </td>
+
+        <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
+
+        <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
     </tr>
     </tbody>
 </table>

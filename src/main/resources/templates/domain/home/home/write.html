@@ -50,7 +50,7 @@
 
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form th:action="@{/member/write}" method="post">
+    <form th:action="@{/member/write}" th:object="${QuestionWriteForm}" method="post">
         <div class="mb-3">
             <label for="title" class="form-label">제목</label>
             <input type="text" name="title" id="title" class="form-control">
