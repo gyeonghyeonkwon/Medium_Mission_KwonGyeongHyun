@@ -48,7 +48,7 @@ public class MemberJoinController {
                 throw new IllegalArgumentException("입력하신 비밀번호가 일치하지 않습니다.");
             }
             // 사용자 닉네임 중복 되면 실행
-            this.memberService.getUser(memberUserCreateForm.getNickname());
+            this.memberService.findByNickname(memberUserCreateForm);
 
             //아이디가 중복 되지 않는다면 실행
             this.memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());

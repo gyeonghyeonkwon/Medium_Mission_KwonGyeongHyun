@@ -1,6 +1,7 @@
 package com.ll.medium_mission.domain.home.home.Contoller;
 
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
+import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import com.ll.medium_mission.domain.home.home.form.QuestionWriteForm;
@@ -34,7 +35,7 @@ public class QuestionWriteController {
     }
 
     /**
-     *
+     * DTO를 받아 db에 저장
      *
      */
     @PreAuthorize("isAuthenticated()")
@@ -52,6 +53,10 @@ public class QuestionWriteController {
     @GetMapping("/member/write/{id}")
     public String writeDetail(Model model, @PathVariable("id") Long id) {
 
-        return "domain/home/home/detail";
+        Question question = this.questionService.getQuestion(id);
+
+        model.addAttribute("question", question);
+
+        return "domain/home/home/detailWrite";
     }
 }

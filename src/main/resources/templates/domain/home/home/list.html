@@ -62,7 +62,7 @@
     <tr th:each="question ,loop : ${questionList}">
         <td th:text="${loop.count}"></td>
         <td>
-            <a th:href="@{|/member/detail/${question.id}|}" th:text="${question.title}"></a>
+            <a th:href="@{|/member/write/${question.id}|}" th:text="${question.title}"></a>
         </td>
 
         <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td><!--MemberUser 테이블에 있는 작성자 -->

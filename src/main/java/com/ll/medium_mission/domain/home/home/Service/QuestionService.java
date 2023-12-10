@@ -3,11 +3,13 @@ package com.ll.medium_mission.domain.home.home.Service;
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Repository.QuestionRepository;
+import com.ll.medium_mission.global.error.NotFoundException;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -38,4 +40,13 @@ public class QuestionService {
     public List<Question> getList() {
         return this.questionRepository.findAll();
     }
+
+    public Question getQuestion(Long id) {
+        Optional<Question> question = this.questionRepository.findById(id);
+        if (question.isPresent()) {
+            return question.get();
+        }
+        throw new NotFoundException("해당하는 게시판을 찾을수없습니다 ");
+    }
+
 }

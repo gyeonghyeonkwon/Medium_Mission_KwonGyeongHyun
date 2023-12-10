@@ -2,10 +2,7 @@ package com.ll.medium_mission.domain.home.home.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +12,6 @@ import java.util.List;
  */
 @Entity
 @Getter
-@ToString
 @NoArgsConstructor
 public class Question {
 
