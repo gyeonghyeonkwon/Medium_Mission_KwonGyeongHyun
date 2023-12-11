@@ -41,6 +41,10 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
+    /**
+     *
+     * db에 아이디값을 찾을 수 없는 경우 404 예외 발생
+     * */
     public Question getQuestion(Long id) {
         Optional<Question> question = this.questionRepository.findById(id);
         if (question.isPresent()) {
