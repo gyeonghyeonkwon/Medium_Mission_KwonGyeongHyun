@@ -56,7 +56,7 @@ public class QuestionWriteController {
      */
     @GetMapping("/member/write/{id}")
     public String writeDetail(Model model, @PathVariable("id") Long id) {
-
+        // 글 목록이 없으면 예외
         Question question = this.questionService.getQuestion(id);
 
         model.addAttribute("question", question);
