@@ -7,42 +7,43 @@
     <!-- Bootstrap CSS link (you can replace it with your own) -->
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/style.css}">
+
     <script th:src="@{/js/login.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
-<div class="container">
-    <div class="my-5 ">
-        <div class="mb-3" >
-            <h2 class="mb-3" >Medium 로그인</h2>
-
-            <!-- 로그인 폼 -->
-            <form th:action="@{/member/login}" method="post" onsubmit="submitLoginForm(this); return false;">
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">
-                        사용자ID 또는 비밀번호를 확인해 주세요.
-                    </div>
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="relative flex flex-col justify-center h-screen overflow-hidden">
+    <div class="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
+        <h1 class="text-3xl font-semibold text-center text-gray-700">미디엄 로그인</h1>
+        <form class="space-y-4" th:action="@{/member/login}" method="post" onsubmit="submitLoginForm(this); return false;">
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    사용자ID 또는 비밀번호를 확인해 주세요.
                 </div>
-
-                <div class="mb-3">
-                    <label for="nickname" class="form-label">사용자 ID</label>
-                    <input type="text" name="nickname" id="nickname" class="form-control">
-                </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" name="password" id="password" class="form-control">
-                </div>
-
-                <button type="submit" class="btn btn-primary">로그인</button>
-                <a href="/member/join" class="btn btn-primary">회원 가입</a>
-            </form>
-            <!-- /로그인 폼 -->
-
-        </div>
+            </div>
+            <div>
+                <label for="nickname" class="form-label">
+                    <span class="text-base label-text">ID</span>
+                </label>
+                <input type="text" placeholder="아이디를 입력해주세요" name="nickname" id="nickname" class="form-control" />
+            </div>
+            <div>
+                <label  for="password" class="form-label">
+                    <span class="text-base label-text" >Password</span>
+                </label>
+                <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="form-control" />
+            </div>
+            <a href="#" class="text-xs text-gray-600 hover:underline hover:text-blue-600">비밀번호 찾기</a>
+            <div>
+                <button class="btn btn-block">로그인</button>
+            </div>
+            <div>
+                <a href="/member/join" class="btn btn-block">회원 가입</a>
+            </div>
+        </form>
     </div>
 </div>
-
 </body>
-</html>
 
+</html>

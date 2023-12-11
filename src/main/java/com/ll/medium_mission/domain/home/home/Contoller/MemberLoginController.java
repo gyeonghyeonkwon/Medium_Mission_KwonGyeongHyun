@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class MemberLoginController {
+
+    /**
+     * 로그인 페이지
+     */
     @GetMapping("/")
     public String loginRedirect() {
 
         return "redirect:/member/login";
     }
-
-    /**
-     * 로그인 페이지
-     */
     @GetMapping("/member/login")
     public String loginPage() {
 
-        return "/domain/home/home/login";
+        return "domain/home/home/login";
     }
 
 }
