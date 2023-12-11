@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS link (you can replace it with your own) -->
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/style.css}">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <script th:src="@{/js/join.js}"></script>
 </head>
 <div class="container my-4">
@@ -51,15 +51,26 @@
 
 <div class="container my-3">
     <!-- 질문 -->
+    <div class="post-header">
     <h2 class="border-bottom py-2" th:text="${question.title}"></h2>
-    <div class="card my-3">
-        <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
-            <div class="d-flex justify-content-end">
-                <div class="badge bg-light text-dark p-2 text-start">
-                    <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
-                </div>
-            </div>
+        <div class="post-meta flex justify-end items-center">
+            <span class="text-sm text-gray-500">작성일시:</span>
+            <span th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}" class="text-sm text-gray-800 ml-2"></span>
+        </div>
+        <div class="post-meta" style="margin-top: -22px;">
+            <span class="text-sm text-gray-500 mr-2">작성자:</span>
+            <span th:if="${question.author != null}" th:text="${question.author.nickname}" class="text-sm text-gray-800"></span>
+        </div>
+
+        <div class="post-actions">
+            <a href="#" class="text-sm text-gray-500 hover:text-blue-500 mr-2">글 수정</a>
+            <a href="#" class="text-sm text-gray-500 hover:text-red-500">글 삭제</a>
+        </div>
+
+    </div>
+    <div class="my-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+        <div class="p-4">
+            <div class="text-gray-800" style="white-space: pre-line;" th:text="${question.content}"></div>
         </div>
     </div>
 </div>

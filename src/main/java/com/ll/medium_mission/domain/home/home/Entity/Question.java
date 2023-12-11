@@ -28,6 +28,7 @@ public class Question {
     private LocalDateTime createDate; //시간
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+
     private List<Answer> answerList;
 
     //로그인 유저 엔티티 , 글 목록에 표시 하기 위함
