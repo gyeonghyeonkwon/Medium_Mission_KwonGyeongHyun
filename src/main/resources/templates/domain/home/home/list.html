@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 페이지</title>
     <!-- Bootstrap CSS link (you can replace it with your own) -->
+    <script th:src="@{/js/join.js}"></script>
+<!--    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.8/dist/full.min.css" rel="stylesheet" type="text/css" />-->
+<!--    <script src="https://cdn.tailwindcss.com"></script>-->
+
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/style.css}">
-
-    <script th:src="@{/js/join.js}"></script>
 </head>
+
 <div class="container my-4">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
@@ -75,3 +78,5 @@
     <a href="/member/write" class="btn btn-primary">글 작성</a>
 
 </div>
+
+

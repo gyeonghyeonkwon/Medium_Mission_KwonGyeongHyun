@@ -6,10 +6,14 @@ import com.ll.medium_mission.domain.home.home.form.QuestionWriteForm;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,7 +25,6 @@ public class QuestionModifyController {
 
     /**
      * 게시판 아이디 를 조회 하여  제목 ,내용 을 불러 옴
-     *
      */
     @GetMapping("/member/modify/{id}")
     public String showModify(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm) {
@@ -36,16 +39,18 @@ public class QuestionModifyController {
     }
 
     @PostMapping("/member/modify/{id}")
-    public String update(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm ) {
+    public String update(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm, Principal principal) {
 
         Question question = this.questionService.getQuestion(id);
 
-        questionService.modifySave(question , questionWriteForm.getContent() , questionWriteForm.getTitle());
+        if (!question.getAuthor().getNickname().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정권한이 없습니다.");
+        }
 
+            questionService.modifySave(question, questionWriteForm.getContent(), questionWriteForm.getTitle());
 
-        return String.format("redirect:/member/write/%s", id);
-    }
-
+            return String.format("redirect:/member/write/%s", id);
+        }
 
 
 }
