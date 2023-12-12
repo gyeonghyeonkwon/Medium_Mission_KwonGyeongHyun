@@ -26,7 +26,7 @@
                     <a class="nav-link active" aria-current="page" href="/member/list">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a>
+                    <a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a>
                 </li>
 
                 <li class="nav-item">

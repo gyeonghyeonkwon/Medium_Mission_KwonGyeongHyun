@@ -46,13 +46,15 @@ public class SecurityConfig {
                 )
 
                 /**
-                 *  로그인 성공시 디폴트로 "/member/list"
+                 *  로그인 시 게시판 목록으로 이동
                  */
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
                         .usernameParameter("nickname") // 기본 user -> id 로 변경
                         .defaultSuccessUrl("/member/list"))
-
+                /**
+                 * 로그아웃 시 로그인페이지 이동
+                 */
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                         .logoutSuccessUrl("/")
