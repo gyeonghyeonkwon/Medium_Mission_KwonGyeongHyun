@@ -19,16 +19,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+
                 /**
                  *  해당 사이트 로그인 하지 않으면 url 로 접속 불가
                  */
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+        http .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/member/list" , "/member/write")
                         .authenticated()
                         .anyRequest().permitAll()
 
                 )
+
 
                 .headers(
                         headers ->
@@ -43,7 +44,7 @@ public class SecurityConfig {
                                         new AntPathRequestMatcher("/h2-console/**")
                                 )
                 )
-//                .and()
+
                 /**
                  *  로그인 성공시 디폴트로 "/member/list"
                  */
@@ -53,7 +54,8 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/member/list"));
 
 
-
+        http.exceptionHandling(Exception ->Exception
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
 
         return http.build();
