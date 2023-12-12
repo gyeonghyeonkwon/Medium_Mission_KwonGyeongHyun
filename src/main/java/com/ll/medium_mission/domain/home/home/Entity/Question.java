@@ -36,17 +36,5 @@ public class Question {
     @ManyToOne
     private MemberUser author;
 
-    @Builder
-    public Question(Long id, String title, String content , LocalDateTime createDate , MemberUser author) {
 
-       this.id = id;
-
-       this.title = title;
-
-       this.content = content;
-
-       this.createDate = createDate;
-
-      this.author = author;
-    }
 }

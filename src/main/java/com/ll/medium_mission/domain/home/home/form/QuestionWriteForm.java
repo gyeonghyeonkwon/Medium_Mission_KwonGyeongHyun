@@ -15,11 +15,11 @@ public class QuestionWriteForm {
         private Long id;
 
         @NotBlank(message = "제목을 입력해주세요")
-        @Size(min = 5 , max = 10)
+        @Size
         private String title;
 
         @NotBlank(message = "내용을 입력 해주세요")
-        @Size(min = 10 , max = 30)
+        @Size
         private String content;
 
 }

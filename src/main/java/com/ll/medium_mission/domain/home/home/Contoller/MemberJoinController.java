@@ -56,7 +56,7 @@ public class MemberJoinController {
             return "domain/home/home/list";
 
         }
-        //  에러를 model 에 담아 타임 리프로 전달
+        //  에러를 model 에 담아 타임 리프 로 전달
         catch (IllegalArgumentException e) {
 
             model.addAttribute("error" , e.getMessage());

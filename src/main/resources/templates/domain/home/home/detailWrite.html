@@ -64,7 +64,7 @@
 
         <div class="post-actions">
             <a th:href="@{|/member/modify/${question.id}|}" class="text-sm text-gray-500 hover:text-blue-500 mr-2">글 수정</a>
-            <a href="#" class="text-sm text-gray-500 hover:text-red-500">글 삭제</a>
+            <a onclick="return confirm('정말로 삭제하시겠습니까?');" class="text-sm text-gray-500 hover:text-red-500" th:href="@{|/member/delete/${question.id}|}" >글 삭제</a>
         </div>
 
     </div>

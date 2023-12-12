@@ -37,14 +37,26 @@ public class QuestionModify {
 
     @PostMapping("/member/modify/{id}")
     public String update(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm ) {
-        log.info("QuestionWriteForm: {}", questionWriteForm.toString());
 
         Question question = this.questionService.getQuestion(id);
 
-       this.questionService.modifySave(question , questionWriteForm.getTitle(), questionWriteForm.getContent());
+        questionService.modifySave(question , questionWriteForm.getContent() , questionWriteForm.getTitle());
 
-        log.info(questionWriteForm.getTitle() , questionWriteForm.getContent());
+
         return String.format("redirect:/member/write/%s", id);
     }
+
+    @GetMapping("/member/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
+
+        Question question = this.questionService.getQuestion(id);
+
+        this.questionService.delete(question.getId());
+
+        return "redirect:/member/list";
+
+    }
+
+
 
 }
