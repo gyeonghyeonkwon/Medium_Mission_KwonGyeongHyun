@@ -51,7 +51,14 @@ public class SecurityConfig {
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
                         .usernameParameter("nickname") // 기본 user -> id 로 변경
-                        .defaultSuccessUrl("/member/list"));
+                        .defaultSuccessUrl("/member/list"))
+
+                .logout((logout) -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)) //로그 아웃시 세션 삭제
+        ;
+
 
 
         http.exceptionHandling(Exception ->Exception
