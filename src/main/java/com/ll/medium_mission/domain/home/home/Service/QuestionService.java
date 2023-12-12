@@ -21,7 +21,7 @@ public class QuestionService {
     /**
      * 엔티티 DB에 저장
      */
-    public void write(String title, String content , MemberUser author) {
+    public void write(String title, String content, MemberUser author) {
         Question q = Question.builder()
                 .title(title)
                 .content(content)
@@ -34,7 +34,7 @@ public class QuestionService {
 
     /**
      * 질문 게시글 리스트
-     *
+     * <p>
      * 질문 DB 테이블 에 저장되어있는 데이터를 조회
      */
     public List<Question> getList() {
@@ -42,9 +42,8 @@ public class QuestionService {
     }
 
     /**
-     *
      * db에 아이디값을 찾을 수 없는 경우 404 예외 발생
-     * */
+     */
     public Question getQuestion(Long id) {
         Optional<Question> question = this.questionRepository.findById(id);
         if (question.isPresent()) {
@@ -53,4 +52,11 @@ public class QuestionService {
         throw new NotFoundException("해당하는 게시판을 찾을수없습니다 ");
     }
 
+    public void modifySave(Question question, String title, String content ) {
+        question.setTitle(title);
+        question.setContent(content);
+        question.setCreateDate(LocalDateTime.now());
+
+        this.questionRepository.save(question);
+    }
 }

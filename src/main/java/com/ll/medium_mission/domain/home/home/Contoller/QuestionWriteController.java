@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,6 @@ public class QuestionWriteController {
     private final QuestionService questionService;
     private final MemberService memberService;
 
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/member/write")
     public String showWrite(QuestionWriteForm  QuestionWriteForm) {
 
@@ -38,7 +36,6 @@ public class QuestionWriteController {
      * DTO를 받아 db에 저장
      *
      */
-    @PreAuthorize("isAuthenticated()")
     @PostMapping("/member/write")
 
     public String write(@Valid QuestionWriteForm questionWriteForm, Principal principal) {
