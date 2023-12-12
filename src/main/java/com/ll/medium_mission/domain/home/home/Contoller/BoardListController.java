@@ -1,6 +1,8 @@
 package com.ll.medium_mission.domain.home.home.Contoller;
 
+import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Entity.Question;
+import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import java.util.List;
 public class BoardListController {
 
     private final QuestionService questionService;
+    private final MemberService memberService;
     @GetMapping("/member/list")
     public String showList(Model model) {
         /**
@@ -23,8 +26,11 @@ public class BoardListController {
          */
         List<Question> questionList = this.questionService.getList();
 
+        MemberUser loginUser = memberService.findById(1L).get();
+
         model.addAttribute("questionList" , questionList );
 
+        model.addAttribute("loginUser" , loginUser );
         return "/domain/home/home/list";
     }
 }

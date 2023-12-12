@@ -69,7 +69,9 @@ public class MemberService {
         throw new IllegalArgumentException("아이디가 존재합니다.");
     }
 
-
+    public Optional<MemberUser> findById(long id) {
+        return memberRepository.findById(id);
+    }
 
 }
 

@@ -29,10 +29,14 @@
                     <a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
             </ul>
+
+            <div>
+                    <!-- 엔티티 username -->
+            <span th:text="${loginUser.username}"></span>님 환영합니다.
+
+            </div>
+
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
