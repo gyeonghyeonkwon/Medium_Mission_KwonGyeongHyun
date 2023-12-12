@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 @ToString
 @Slf4j
-public class QuestionModify {
+public class QuestionModifyController {
 
     private final QuestionService questionService;
 
@@ -44,17 +44,6 @@ public class QuestionModify {
 
 
         return String.format("redirect:/member/write/%s", id);
-    }
-
-    @GetMapping("/member/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
-
-        Question question = this.questionService.getQuestion(id);
-
-        this.questionService.delete(question.getId());
-
-        return "redirect:/member/list";
-
     }
 
 

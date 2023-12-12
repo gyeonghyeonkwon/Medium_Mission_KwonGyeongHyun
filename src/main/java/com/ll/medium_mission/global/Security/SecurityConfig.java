@@ -10,18 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests.requestMatchers("/**")
-                                .permitAll()
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/member/list" , "/member/write")
+                        .authenticated()
+                        .anyRequest().permitAll()
+
                 )
+
                 .headers(
                         headers ->
                                 headers.frameOptions(
@@ -32,10 +37,10 @@ public class SecurityConfig {
                 .csrf(
                         csrf ->
                                 csrf.ignoringRequestMatchers(
-                                        "/h2-console/**"
+                                        new AntPathRequestMatcher("/h2-console/**")
                                 )
                 )
-
+//                .and()
                 /**
                  *  로그인 성공시 디폴트로 "/member/list"
                  */
@@ -46,9 +51,11 @@ public class SecurityConfig {
 
 
 
+
+
         return http.build();
     }
-   //패스워드 암호화
+    //패스워드 암호화
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

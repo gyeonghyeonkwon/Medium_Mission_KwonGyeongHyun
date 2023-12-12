@@ -20,10 +20,10 @@ public class MemberJoinController {
 
     private final MemberService memberService;
 
-
     /**
      * 회원가입 페이지
      */
+
     @GetMapping("/join")
     public String showJoinPage(MemberUserCreateForm memberUserCreateForm) {
 
@@ -48,9 +48,9 @@ public class MemberJoinController {
                 throw new IllegalArgumentException("입력하신 비밀번호가 일치하지 않습니다.");
             }
             // 사용자 닉네임 중복 되면 실행
-            this.memberService.findByNickname(memberUserCreateForm);
+             this.memberService.findByNickname(memberUserCreateForm);
 
-            //아이디가 중복 되지 않는다면 실행
+            //아이디가 중복 되지 않는다면 아이디생성
             this.memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
             return "domain/home/home/list";

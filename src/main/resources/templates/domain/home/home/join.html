@@ -30,7 +30,7 @@
             <label for="nickname" class="form-label">사용자ID</label>
             <input type="text" th:field="*{nickname}" class="form-control" th:attr="minlength=5, maxlength=20">
             <small class="form-text text-muted">5자 이상, 최대 20자까지 입력 가능합니다.</small>
-            <div id="error" th:text="${error}">
+            <div id="error" style="color: red; font-size: 80%;" th:text="${error}">
                 <small th:text="${error}"></small>
             </div>
         </div>

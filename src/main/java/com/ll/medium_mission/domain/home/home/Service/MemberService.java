@@ -42,6 +42,7 @@ public class MemberService {
     /**
      * db에서 저장된 아이디를 찾아
      * 중복된 아이디가 있으면 예외를 발생킨다.
+     * joinController 에서 실행
      */
 
     public void findByNickname (MemberUserCreateForm memberUserCreateForm) {
@@ -54,6 +55,10 @@ public class MemberService {
 
     }
 
+    /**
+     *
+     * QuestionModifyController 에서 실행
+     */
     public MemberUser getUser(String nickname) {
 
         Optional<MemberUser> findUser = memberRepository.findByNickname(nickname);
@@ -63,6 +68,8 @@ public class MemberService {
         }
         throw new IllegalArgumentException("아이디가 존재합니다.");
     }
+
+
 
 }
 
