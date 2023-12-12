@@ -58,7 +58,7 @@ public class QuestionService {
     public void modifySave(Question question ,String title, String content ) {
         question.setContent(content);
         question.setTitle(title);
-        question.setCreateDate(LocalDateTime.now());
+        question.setModifyDate(LocalDateTime.now());
         this.questionRepository.save(question);
 
     }

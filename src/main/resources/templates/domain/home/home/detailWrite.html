@@ -56,7 +56,12 @@
         <div class="post-meta flex justify-end items-center">
             <span class="text-sm text-gray-500">작성일시:</span>
             <span th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}" class="text-sm text-gray-800 ml-2"></span>
+            <!-- 수정일시 추가 -->
+            <span th:if="${question.modifyDate != null}" class="text-sm text-gray-500 ml-4">수정일시:</span>
+            <span th:if="${question.modifyDate != null}" th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}" class="text-sm text-gray-800"></span>
         </div>
+
+
         <div class="post-meta" style="margin-top: -22px;">
             <span class="text-sm text-gray-500 mr-2">작성자:</span>
             <span th:if="${question.author != null}" th:text="${question.author.nickname}" class="text-sm text-gray-800"></span>

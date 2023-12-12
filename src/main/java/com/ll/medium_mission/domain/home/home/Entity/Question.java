@@ -3,6 +3,7 @@ package com.ll.medium_mission.domain.home.home.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +27,11 @@ public class Question {
     @Column(columnDefinition = "TEXT")
     private String content; // 내용
 
-    private LocalDateTime createDate; //시간
+    @CreatedDate
+    private LocalDateTime createDate; //생성 시간
+
+    @CreatedDate
+    private  LocalDateTime modifyDate; // 수정 시간
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 
