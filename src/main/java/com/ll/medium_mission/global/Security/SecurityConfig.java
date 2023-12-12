@@ -20,6 +20,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                /**
+                 *  해당 사이트 로그인 하지 않으면 url 로 접속 불가
+                 */
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/member/list" , "/member/write")
                         .authenticated()
