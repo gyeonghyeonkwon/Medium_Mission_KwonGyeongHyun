@@ -24,3 +24,4 @@ function toastWarning(msg) {
 function toastNotice(msg) {
     toastr["success"](msg, "성공");
 }
+

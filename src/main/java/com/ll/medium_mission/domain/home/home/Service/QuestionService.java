@@ -72,4 +72,16 @@ public class QuestionService {
         questionRepository.deleteById(id);
 
     }
+
+    public List<Question>getUserMyList(String username) {
+
+        List<Question> userQuestions = questionRepository.findByAuthor_NicknameOrderByCreateDateDesc(username);
+
+        if (userQuestions.isEmpty()) {
+            throw new IllegalArgumentException("해당 사용자의 게시글이 없습니다.");
+        }
+
+        return userQuestions;
+    }
+
 }

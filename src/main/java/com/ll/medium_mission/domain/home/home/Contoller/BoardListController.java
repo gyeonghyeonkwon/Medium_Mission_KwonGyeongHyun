@@ -5,10 +5,12 @@ import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -34,5 +36,22 @@ public class BoardListController {
 
         model.addAttribute("loginUser" , loginUser );
         return "/domain/home/home/list";
+    }
+
+    /**
+     * 나의 글 보기
+     * */
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/member/myList")
+    public String showMyList(Model model , Principal principal) {
+
+        String username = principal.getName();
+
+        List<Question> myList = this.questionService.getUserMyList(username);
+
+        model.addAttribute("myList" , myList);
+
+        return "/domain/home/home/myList";
     }
 }

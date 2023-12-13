@@ -42,6 +42,7 @@ public class MemberJoinController {
          * 문제없다면 DB 저장
          * 로그인 성공 시 글 목록 페이지로 이동
          */
+
         try {
             // 비밀번호 일치 여부 확인
             if (!memberUserCreateForm.getPassword().equals(memberUserCreateForm.getPasswordConfirm())) {
@@ -54,7 +55,6 @@ public class MemberJoinController {
             this.memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
             return "redirect:/member/login";
-
         }
         //  에러를 model 에 담아 타임 리프 로 전달
         catch (IllegalArgumentException e) {
