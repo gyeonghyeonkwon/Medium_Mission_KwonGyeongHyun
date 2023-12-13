@@ -18,15 +18,17 @@ public class BoardListController {
     private final QuestionService questionService;
     private final MemberService memberService;
     @GetMapping("/member/list")
-    public String showList(Model model) {
+    public String showList(Model model ,MemberUser memberUser) {
         /**
          * 게시글 리스트
-         * 질문 DB 테이블 에 저장되어있는 데이터를 조회 하여 모델 에 저장.
+         * 질문 DB 테이블 에 저장되어있는 데이터를 조회 하여 뷰로 전달.
+         *
+         * 엔티티 id 값을 엔티티의 이름을 알아내어 뷰로 전달
          *
          */
         List<Question> questionList = this.questionService.getList();
 
-        MemberUser loginUser = memberService.findById(1L).get();
+        String loginUser = memberUser.getUsername();
 
         model.addAttribute("questionList" , questionList );
 
