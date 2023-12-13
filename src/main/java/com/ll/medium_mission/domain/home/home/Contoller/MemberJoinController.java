@@ -53,7 +53,7 @@ public class MemberJoinController {
             //아이디가 중복 되지 않는다면 아이디생성
             this.memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
-            return "domain/home/home/list";
+            return "redirect:/member/login";
 
         }
         //  에러를 model 에 담아 타임 리프 로 전달

@@ -7,8 +7,13 @@
     <!-- Bootstrap CSS link (you can replace it with your own) -->
     <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/style.css}">
-
-    <script th:src="@{/js/join.js}"></script>
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- toastr 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link href="https://jhs512.github.io/toastr/toastr.css" rel="stylesheet">
+    <script th:src="@{/js/write.js}"></script>
+    <script th:src="@{/js/test.js}"></script>
 </head>
 <div class="container my-4">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -51,7 +56,8 @@
 
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">글 쓰기</h5>
-    <form th:action="@{/member/write}" th:object="${QuestionWriteForm}" method="post">
+<!--    <form th:action="@{/member/write}" th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">-->
+        <form th:action="@{/member/write}"  method="post" onsubmit="submitWriteForm(this); return false;">
         <div class="mb-3">
             <label for="title" class="form-label">제목</label>
             <input type="text" name="title" id="title" class="form-control">

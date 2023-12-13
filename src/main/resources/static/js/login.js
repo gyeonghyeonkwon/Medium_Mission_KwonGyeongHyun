@@ -13,14 +13,14 @@ function submitLoginForm(form) {
     const password = inputPassword.value;
 
     if (nickname.length == 0) {
-    alert('아이디를 입력해주세요.');
+        toastWarning('아이디를 입력해주세요.');
     inputId.focus();
 
     return;
 }
 
     if (password.length == 0) {
-    alert('비밀번호를 입력해주세요.');
+        toastWarning('비밀번호를 입력해주세요.');
     inputPassword.focus();
 
     return;

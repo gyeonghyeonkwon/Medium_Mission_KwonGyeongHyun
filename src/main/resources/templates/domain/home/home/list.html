@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">  <!--스프링큐리티 인증된 사용자 명을 사용하기위해 추가 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,8 +32,11 @@
 
                 <li class="nav-item">
                     <div class="nav-link d-flex align-items-center" >
+                        <!--로그인 한 사용자-->
                         <span sec:authorize="isAuthenticated()" th:text="${#authentication.name}"></span>님 환영합니다.
+
                     </div>
+
                 </li>
 
             </ul>

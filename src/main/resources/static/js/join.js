@@ -1,7 +1,9 @@
+
 /**
  *
  * 회원 가입 폼 처리
  */
+
 function submitJoinForm(form) {
     const inputs = {
         'username': '이름',
@@ -16,7 +18,7 @@ function submitJoinForm(form) {
         const inputValue = form[inputName].value.trim();
 
         if (inputValue.length === 0) {
-            alert(`${inputs[inputName]}을 (를) 입력해주세요.`);
+            toastWarning(`${inputs[inputName]}을 (를) 입력해주세요.`);
             form[inputName].focus();
             return;
         }
@@ -27,7 +29,7 @@ function submitJoinForm(form) {
         const passwordConfirm = form['passwordConfirm'].value.trim();
 
         if (password !== passwordConfirm) {
-            alert('입력하신 비밀번호가 일치하지 않습니다.');
+            toastWarning('입력하신 비밀번호가 일치하지 않습니다.');
             form['password'].focus();
             return;
         }
@@ -43,3 +45,5 @@ function submitJoinForm(form) {
 setTimeout(function() {
     document.getElementById('error').style.display = 'none';
 }, 5000);
+
+

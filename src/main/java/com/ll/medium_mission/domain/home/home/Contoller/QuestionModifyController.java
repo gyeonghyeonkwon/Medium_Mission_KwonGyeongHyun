@@ -3,6 +3,7 @@ package com.ll.medium_mission.domain.home.home.Contoller;
 import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import com.ll.medium_mission.domain.home.home.form.QuestionWriteForm;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class QuestionModifyController {
     }
 
     @PostMapping("/member/modify/{id}")
-    public String update(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm, Principal principal) {
+    public String update(@PathVariable("id") Long id, @Valid QuestionWriteForm questionWriteForm, Principal principal) {
 
         Question question = this.questionService.getQuestion(id);
 
