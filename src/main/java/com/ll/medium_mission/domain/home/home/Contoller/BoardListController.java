@@ -39,8 +39,10 @@ public class BoardListController {
     }
 
     /**
-     * 나의 글 보기
-     * */
+     * 내가 작성 한 글 불러오기
+     * 로그인 사용자 의 게시글을 저장하여 타임리프에 전달.
+     *  자신의 계정이 아니면 게시글을 볼수 없다.
+     */
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/member/myList")

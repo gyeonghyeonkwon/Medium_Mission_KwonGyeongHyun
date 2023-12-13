@@ -66,15 +66,15 @@
         <tr th:each="question ,loop : ${myList}">
             <td th:text="${loop.count}"></td>
             <td>
-                <a th:href="@{|/member/myList/${question}|}" th:text="${question.title}"></a>
+                <a th:href="@{|/member/write/${question.getId()}|}" th:text="${question.getTitle()}"></a>
             </td>
 
-            <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
+            <td><span th:if="${question.getAuthor() != null}" th:text="${question.getAuthor().getNickname()}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
 
-            <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(question.getCreateDate(), 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
-    <a href="/member/write" class="btn btn-primary">글 작성</a>
     <a href="/member/myList" class="btn btn-primary">내글 보기</a>
+    <a href="/member/list" class="btn btn-primary">뒤로가기</a>
 </div>
