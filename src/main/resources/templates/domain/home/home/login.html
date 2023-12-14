@@ -52,3 +52,12 @@
 </body>
 
 </html>
+
+<script>
+
+    const urlParams = getUrlParams(location.href);
+    if (urlParams.msg) {
+        toastNotice(urlParams.msg);
+    }
+
+</script>

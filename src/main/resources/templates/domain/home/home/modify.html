@@ -75,3 +75,14 @@
         <a href="/member/list" class="btn btn-primary">취소 </a>
     </form>
 </div>
+
+
+<script>
+
+    const urlParams = getUrlParams(location.href);
+    if (urlParams.msg) {
+        toastNotice(urlParams.msg);
+    }
+
+</script>
+

@@ -2,6 +2,7 @@ package com.ll.medium_mission.domain.home.home.Contoller;
 
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
+import com.ll.medium_mission.global.Rq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberJoinController {
 
     private final MemberService memberService;
+    private final Rq rq;
 
     /**
      * 회원가입 페이지
@@ -54,7 +56,7 @@ public class MemberJoinController {
             //아이디가 중복 되지 않는다면 아이디생성
             this.memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
-            return "redirect:/member/login";
+            return rq.redirect("/member/login" , "회원가입이성공하였습니다 ");
         }
         //  에러를 model 에 담아 타임 리프 로 전달
         catch (IllegalArgumentException e) {

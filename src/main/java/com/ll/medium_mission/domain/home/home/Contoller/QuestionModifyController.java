@@ -3,6 +3,7 @@ package com.ll.medium_mission.domain.home.home.Contoller;
 import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import com.ll.medium_mission.domain.home.home.form.QuestionWriteForm;
+import com.ll.medium_mission.global.Rq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -23,6 +24,7 @@ import java.security.Principal;
 public class QuestionModifyController {
 
     private final QuestionService questionService;
+    private final Rq rq;
 
     /**
      * 게시판 아이디 를 조회 하여  제목 ,내용 을 불러 옴
@@ -51,10 +53,10 @@ public class QuestionModifyController {
         if (!question.getAuthor().getNickname().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정권한이 없습니다.");
         }
-            // 제목 , 내용 순으로 불러 와야한다.
+            // 제목 , 내용 순으로 불러 와야 한다.
             questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent());
 
-            return String.format("redirect:/member/write/%s", id);
+            return rq.redirect("/member/write/%s" , "test").formatted(id);
         }
 
 
