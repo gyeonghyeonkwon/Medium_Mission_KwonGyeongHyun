@@ -5,6 +5,7 @@ import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import com.ll.medium_mission.domain.home.home.form.QuestionWriteForm;
+import com.ll.medium_mission.global.Rq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -25,6 +26,7 @@ public class QuestionWriteController {
 
     private final QuestionService questionService;
     private final MemberService memberService;
+    private final Rq rq;
 
     @GetMapping("/member/write")
     public String showWrite(QuestionWriteForm  QuestionWriteForm) {
@@ -44,7 +46,7 @@ public class QuestionWriteController {
 
         this.questionService.write(questionWriteForm.getTitle(), questionWriteForm.getContent(), memberUser);
 
-        return "redirect:/member/list";
+        return rq.redirect("/member/list","게시물이 등록되었습니다.");
     }
 
     /**
