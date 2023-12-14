@@ -21,6 +21,7 @@
 <div class="relative flex flex-col justify-center h-screen overflow-hidden">
     <div class="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
         <h1 class="text-3xl font-semibold text-center text-gray-700">미디엄 로그인</h1>
+        <!--form 시작-->
         <form class="space-y-4" th:action="@{/member/login}" method="post" onsubmit="submitLoginForm(this); return false;">
             <div th:if="${param.error}">
                 <div class="alert alert-danger">

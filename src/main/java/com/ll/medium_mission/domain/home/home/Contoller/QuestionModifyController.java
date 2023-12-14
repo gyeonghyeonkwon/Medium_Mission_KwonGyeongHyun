@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 
 @Controller
@@ -53,11 +55,14 @@ public class QuestionModifyController {
         if (!question.getAuthor().getNickname().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정권한이 없습니다.");
         }
-            // 제목 , 내용 순으로 불러 와야 한다.
-            questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent());
+        // 제목 , 내용 순으로 불러 와야 한다.
+        questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent());
 
-            return rq.redirect("/member/write/%s" , "test").formatted(id);
-        }
+        String msg="%d번게시물이생성되었습니다.".formatted(question.getId());
 
+        msg=URLEncoder.encode(msg,StandardCharsets.UTF_8);
+
+        return String.format("redirect:/member/write/%s?msg=%s",question.getId(),msg);
+    }
 
 }

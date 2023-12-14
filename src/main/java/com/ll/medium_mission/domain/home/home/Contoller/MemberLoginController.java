@@ -1,15 +1,19 @@
 package com.ll.medium_mission.domain.home.home.Contoller;
 
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
+import com.ll.medium_mission.global.Rq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberLoginController {
   private final  MemberService memberService ;
+  private final Rq rq;
     /**
      * 로그인 페이지
      */
@@ -32,6 +36,10 @@ public class MemberLoginController {
 
         return "domain/home/home/login";
     }
-    
 
+  @PostMapping("/member/list")
+  public String loginPage2(Model model) {
+
+    return rq.redirect("/member/list" , "로그인완료");
+  }
 }

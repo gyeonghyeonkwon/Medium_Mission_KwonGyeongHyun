@@ -77,13 +77,9 @@ public class BoardListController {
     @GetMapping("/member/{username}/{id}")
     public String nameIdSearch(@PathVariable("username") String username , @PathVariable("id") Long id , Model model){
 
-
         Question question = this.questionService.getQuestion(id);
 
-
         model.addAttribute("question", question);
-
-
 
         return  "/domain/home/home/detailWrite";
     }
