@@ -2,6 +2,7 @@ package com.ll.medium_mission.domain.home.home.Contoller;
 
 import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
+import com.ll.medium_mission.global.Rq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.security.Principal;
 public class QuestionRemoveController {
 
     private  final QuestionService questionService;
+    private final Rq rq;
 
     /**
      *
@@ -30,8 +32,8 @@ public class QuestionRemoveController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "삭제권한이 없습니다.");
         }
         this.questionService.delete(question.getId());
-
-        return "redirect:/member/list";
+        //삭제 메세지
+        return rq.redirect("/member/list","%d번 게시물이 삭제가 완료되었습니다".formatted(question.getId()));
 
     }
 }

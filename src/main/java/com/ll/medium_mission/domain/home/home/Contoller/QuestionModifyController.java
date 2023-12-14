@@ -27,7 +27,6 @@ public class QuestionModifyController {
 
     private final QuestionService questionService;
     private final Rq rq;
-
     /**
      * 게시판 아이디 를 조회 하여  제목 ,내용 을 불러 옴
      */
@@ -58,11 +57,12 @@ public class QuestionModifyController {
         // 제목 , 내용 순으로 불러 와야 한다.
         questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent());
 
+        // 글 수정 알림
         String msg="%d번게시물이생성되었습니다.".formatted(question.getId());
 
         msg=URLEncoder.encode(msg,StandardCharsets.UTF_8);
 
-        return String.format("redirect:/member/write/%s?msg=%s",question.getId(),msg);
+        return rq.redirect("/member/write/%s".formatted(id) , "%s 번 게시물이 수정되었습니다 ".formatted(question.getId()));
     }
 
 }
