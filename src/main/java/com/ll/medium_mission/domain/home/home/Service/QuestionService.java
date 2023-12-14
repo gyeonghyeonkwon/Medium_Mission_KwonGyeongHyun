@@ -56,8 +56,8 @@ public class QuestionService {
      * 수정 내용 저장
      */
     public void modifySave(Question question ,String title, String content ) {
-        question.setContent(content);
         question.setTitle(title);
+        question.setContent(content);
         question.setModifyDate(LocalDateTime.now());
         this.questionRepository.save(question);
 
@@ -73,6 +73,9 @@ public class QuestionService {
 
     }
 
+    /**
+     * 로그인 회원 글 불러 오기
+     */
     public List<Question>getUserMyList(String username) {
 
         List<Question> userQuestions = questionRepository.findByAuthor_NicknameOrderByCreateDateDesc(username);

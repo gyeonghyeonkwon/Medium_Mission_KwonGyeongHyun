@@ -57,7 +57,7 @@
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">글 쓰기</h5>
 <!--    <form th:action="@{/member/write}" th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">-->
-        <form th:action="@{/member/write}"  method="post" onsubmit="submitWriteForm(this); return false;">
+        <form th:action="@{/member/write}"  th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">
         <div class="mb-3">
             <label for="title" class="form-label">제목</label>
             <input type="text" name="title" id="title" class="form-control">

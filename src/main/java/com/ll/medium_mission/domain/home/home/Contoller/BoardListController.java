@@ -70,15 +70,19 @@ public class BoardListController {
         return "/domain/home/home/myList";
     }
 
+    /**
+     *
+     * @회원 아이디 게시글 상세보기
+     */
     @GetMapping("/member/{username}/{id}")
     public String nameIdSearch(@PathVariable("username") String username , @PathVariable("id") Long id , Model model){
 
-        List<Question> myList = this.questionService.getUserMyList(username);
+//        List<Question> myList = this.questionService.getUserMyList(username);
         Question question = this.questionService.getQuestion(id);
 
 
         model.addAttribute("question", question);
-        model.addAttribute("myList" , myList);
+//        model.addAttribute("myList" , myList);
 
 
         return  "/domain/home/home/detailWrite";

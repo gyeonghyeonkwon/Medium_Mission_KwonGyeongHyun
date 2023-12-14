@@ -51,8 +51,8 @@ public class QuestionModifyController {
         if (!question.getAuthor().getNickname().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정권한이 없습니다.");
         }
-
-            questionService.modifySave(question, questionWriteForm.getContent(), questionWriteForm.getTitle());
+            // 제목 , 내용 순으로 불러 와야한다.
+            questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent());
 
             return String.format("redirect:/member/write/%s", id);
         }
