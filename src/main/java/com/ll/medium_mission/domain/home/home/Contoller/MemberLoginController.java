@@ -21,12 +21,12 @@ public class MemberLoginController {
 
     /**
      *
-     *  로그인 되어 있지 않는 사용자 만이 접속 가능
+     *  로그인 되어 있지 않는 사용자 만이 로그인 페이지 접속 가능
      *
      *  현재 서버에는 강제로 로그인하게 되어있다
-     *  로그아웃 되면 login 화면으로 넘어갈수없다.
+     *  로그인 되면 login 화면으로 넘어갈수없다.
      */
-    @PreAuthorize("isAnonymous()")
+    @PreAuthorize("isAnonymous()") //로그인이 되어있지 않는 사용자만이 접속 가능
     @GetMapping("/member/login")
     public String loginPage() {
 

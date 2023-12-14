@@ -17,6 +17,10 @@ public class QuestionRemoveController {
 
     private  final QuestionService questionService;
 
+    /**
+     *
+     *  로그인 한 계정으로 만 자신의 글 삭제가가능하다
+     * */
     @GetMapping("/member/delete/{id}")
     public String delete(@PathVariable("id") Long id , Principal principal) {
 

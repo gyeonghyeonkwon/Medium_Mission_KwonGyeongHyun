@@ -1,33 +1,27 @@
 package com.ll.medium_mission;
 
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
-import com.ll.medium_mission.domain.home.home.Entity.Question;
-import com.ll.medium_mission.domain.home.home.Repository.QuestionRepository;
+import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
-
 @SpringBootTest
-class MediumMissonApplicationTests {
+class MediumMissionApplicationTests {
     @Autowired
-    private  QuestionRepository questionRepository;
+    private QuestionService questionService;
     @Test
-    void contextLoads() {
-    MemberUser author = new MemberUser();
-            author.setNickname("kyanghyang12");
-            author.setPassword("1111");
+    void test() {
 
+        for (int i=1; i <= 30; i++) {
+            String title = "테스트 제목 : [%03d]%n".formatted(i);
 
-        Question q1 = Question.builder()
-                .title("sbb가 무엇인가요?")
-                .content("sbb에 대해서 알고 싶습니다.")
-                .createDate(LocalDateTime.now())
-                .author(author)
-                .build();
+            String content = "테스트 내용";
 
-        this.questionRepository.save(q1);
+            MemberUser author = new MemberUser();
+            author.setNickname("test"+i);
+        this.questionService.write(title , content , author );
     }
 
+}
 }

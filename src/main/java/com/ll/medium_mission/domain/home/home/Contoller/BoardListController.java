@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.util.List;
@@ -56,4 +57,17 @@ public class BoardListController {
 
         return "/domain/home/home/myList";
     }
+
+    /**
+     * 회원이름으로 조회
+     */
+    @GetMapping("/member/{username}")
+    public String nameSearch(@PathVariable String username , Model model) {
+
+        List<Question> myList = this.questionService.getUserMyList(username);
+        model.addAttribute("myList" , myList);
+
+        return "/domain/home/home/myList";
+    }
+
 }
