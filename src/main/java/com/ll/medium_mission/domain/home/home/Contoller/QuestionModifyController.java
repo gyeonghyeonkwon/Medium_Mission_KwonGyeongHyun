@@ -39,6 +39,10 @@ public class QuestionModifyController {
 
     }
 
+    /**
+     * 로그인 된 사용자만 이 수정이 가능하다
+     *
+     */
     @PostMapping("/member/modify/{id}")
     public String update(@PathVariable("id") Long id, @Valid QuestionWriteForm questionWriteForm, Principal principal) {
 

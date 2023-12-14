@@ -62,7 +62,7 @@ public class BoardListController {
      * 회원이름으로 조회
      */
     @GetMapping("/member/{username}")
-    public String nameSearch(@PathVariable String username , Model model) {
+    public String nameSearch(@PathVariable("username") String username , Model model) {
 
         List<Question> myList = this.questionService.getUserMyList(username);
         model.addAttribute("myList" , myList);
@@ -70,4 +70,17 @@ public class BoardListController {
         return "/domain/home/home/myList";
     }
 
+    @GetMapping("/member/{username}/{id}")
+    public String nameIdSearch(@PathVariable("username") String username , @PathVariable("id") Long id , Model model){
+
+        List<Question> myList = this.questionService.getUserMyList(username);
+        Question question = this.questionService.getQuestion(id);
+
+
+        model.addAttribute("question", question);
+        model.addAttribute("myList" , myList);
+
+
+        return  "/domain/home/home/detailWrite";
+    }
 }

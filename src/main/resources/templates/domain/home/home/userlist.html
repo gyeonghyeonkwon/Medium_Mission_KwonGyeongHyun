@@ -66,7 +66,7 @@
         <tr th:each="question ,loop : ${myList}">
             <td th:text="${loop.count}"></td>
             <td>
-                <a th:href="@{|/member/${question.getAuthor().getNickname()}/${question.getId()}|}" th:text="${question.getTitle()}"></a>
+                <a th:href="@{|/member/username/${question.gettitle()}|}" th:text="${question.getTitle()}"></a>
             </td>
 
             <td><span th:if="${question.getAuthor() != null}" th:text="${question.getAuthor().getNickname()}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
@@ -75,6 +75,6 @@
         </tr>
         </tbody>
     </table>
-<!--    <a href="/member/myList" class="btn btn-primary">내글 보기</a>-->
+    <!--    <a href="/member/myList" class="btn btn-primary">내글 보기</a>-->
     <a href="/member/list" class="btn btn-primary">뒤로가기</a>
 </div>
