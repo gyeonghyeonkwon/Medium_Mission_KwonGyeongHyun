@@ -40,15 +40,21 @@ public class QuestionService {
     }
 
     /**
-     * db에 아이디값을 찾을 수 없는 경우 404 예외 발생
+     * db에서 아이디값을 찾을 수 없는 경우 404 예외 발생
      *
+     * 저장 되어 있는 게시글 클릭 시 조회수 1 씩 증가 (수정 예정)
      */
     public Question getQuestion(Long id) {
         Optional<Question> question = this.questionRepository.findById(id);
         if (question.isPresent()) {
-            return question.get();
+            Question questionView = question.get();
+            questionView.setView(questionView.getView()+1);
+            this.questionRepository.save(questionView);
+            return questionView;
         }
-        throw new NotFoundException("해당하는 게시판을 찾을수없습니다 ");
+        else {
+            throw new NotFoundException("해당하는 게시판을 찾을수없습니다 ");
+        }
     }
 
     /**

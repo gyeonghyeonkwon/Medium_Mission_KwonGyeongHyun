@@ -37,7 +37,7 @@ public class MemberLoginController {
         return "domain/home/home/login";
     }
 
-  @PostMapping("/member/list")
+  @PostMapping("/member/login")
   public String loginPage2(Model model) {
 
     return rq.redirect("/member/list" , "로그인완료");

@@ -75,6 +75,7 @@
         <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
 
         <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${question.view}"></td>
     </tr>
     </tbody>
 </table>

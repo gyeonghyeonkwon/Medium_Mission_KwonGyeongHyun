@@ -27,6 +27,9 @@ public class Question {
     @Column(columnDefinition = "TEXT")
     private String content; // 내용
 
+    @Column(columnDefinition = "integer default 0", nullable = false) //조회수는 0부터 시작
+    private int view; //조회수
+
     @CreatedDate
     private LocalDateTime createDate; //생성 시간
 
