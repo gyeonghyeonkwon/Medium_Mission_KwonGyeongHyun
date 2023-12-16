@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.8/dist/full.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<nav th:replace="~{domain/home/home/test/navbar :: navbarFragment}"></nav>
+
+<th:block layout:fragment="content">
+<p>test</p>
+</th:block>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<!--<script th:src="@{/js/join.js}"></script>-->
+<!--<script th:src="@{/js/test.js}"></script>-->
+<th:block layout:fragment="script"></th:block>
+
+</body>
+</html>

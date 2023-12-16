@@ -16,7 +16,7 @@ public class testController {
 
 
 
-        return "/domain/home/home/test/test" ;
+        return "domain/home/home/test/list";
     }
 
 }
