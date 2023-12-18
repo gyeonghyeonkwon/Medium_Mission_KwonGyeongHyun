@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 페이지</title>
-    <!-- Bootstrap CSS link (you can replace it with your own) -->
-    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.8/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- 제이쿼리 불러오기 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- toastr 불러오기 -->
@@ -16,8 +15,7 @@
     <script th:src="@{/js/test.js}"></script>
 </head>
 <body>
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com"></script>
+
 <div class="relative flex flex-col justify-center h-screen overflow-hidden">
     <div class="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
         <h1 class="text-3xl font-semibold text-center text-gray-700">미디엄 로그인</h1>
@@ -32,20 +30,20 @@
                 <label for="nickname" class="form-label">
                     <span class="text-base label-text">ID</span>
                 </label>
-                <input type="text" placeholder="아이디를 입력해주세요" name="nickname" id="nickname" class="form-control" />
+                <input type="text" placeholder="아이디를 입력해주세요" name="nickname" id="nickname" class="input input-bordered w-full form-control" />
             </div>
             <div>
                 <label  for="password" class="form-label">
                     <span class="text-base label-text" >Password</span>
                 </label>
-                <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="form-control" />
+                <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" class="input select-bordered	 w-full form-control" />
             </div>
             <a href="#" class="text-xs text-gray-600 hover:underline hover:text-blue-600">비밀번호 찾기</a>
             <div>
-                <button class="btn btn-block">로그인</button>
+                <button class="btn btn-neutral w-full">로그인</button>
             </div>
             <div>
-                <a href="/member/join" class="btn btn-block">회원 가입</a>
+                <a href="/member/join" class="btn btn-neutral w-full">회원 가입</a>
             </div>
         </form>
     </div>
