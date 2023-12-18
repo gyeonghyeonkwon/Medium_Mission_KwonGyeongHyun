@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">  <!--스프링큐리티 인증된 사용자 명을 사용하기위해 추가 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 페이지</title>
+    <!-- Bootstrap CSS link (you can replace it with your own) -->
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <!-- 제이쿼리 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- toastr 불러오기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <link href="https://jhs512.github.io/toastr/toastr.css" rel="stylesheet">
+    <script th:src="@{/js/test.js}"></script>
+    <script th:src="@{/js/join.js}"></script>
+</head>
+
+<div class="container my-4">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">게시판</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/member/list">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a>
+                </li>
+
+                <li class="nav-item">
+                    <div class="nav-link d-flex align-items-center" >
+                        <!--로그인 한 사용자-->
+                        <span sec:authorize="isAuthenticated()" th:text="${#authentication.name}"></span>님 환영합니다.
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+</div>
+<div class="container my-3">
+<table class="table">
+    <thead class="table-dark">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성 일시</th>
+        <th>조회 수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question ,loop : ${questionList}">
+        <td th:text="${loop.count}"></td>
+        <td>
+            <a th:href="@{|/member/write/${question.id}|}" th:text="${question.title}"></a>
+        </td>
+
+        <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
+
+        <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${question.view}"></td>
+    </tr>
+    </tbody>
+</table>
+    <a href="/member/write" class="btn btn-primary">글 작성</a>
+    <a href="/member/myList" class="btn btn-primary">내글 보기</a>
+</div>
+
+<script>
+
+    const urlParams = getUrlParams(location.href);
+    if (urlParams.msg) {
+        toastNotice(urlParams.msg);
+    }
+
+</script>

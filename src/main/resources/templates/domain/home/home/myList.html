@@ -1,80 +1,34 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">  <!--스프링큐리티 인증된 사용자 명을 사용하기위해 추가 -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 페이지</title>
-    <!-- Bootstrap CSS link (you can replace it with your own) -->
-    <script th:src="@{/js/join.js}"></script>
-    <!--    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.8/dist/full.min.css" rel="stylesheet" type="text/css" />-->
-    <!--    <script src="https://cdn.tailwindcss.com"></script>-->
+<html layout:decorate= "~{domain/home/home/layout}">
 
-    <link rel="stylesheet" th:href="@{/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/style.css}">
-</head>
+<div layout:fragment="content" class="container my-5 mx-auto">
 
-<div class="container my-4">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">게시판</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/member/list">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a>
-                    </li>
+    <div class="overflow-x-auto">
+        <table class="table table-zebra">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성 일시</th>
+                <th>조회 수</th>
+            </tr>
+            </thead>
 
-                    <li class="nav-item">
-                        <div class="nav-link d-flex align-items-center" >
-                            <!--로그인 한 사용자-->
-                            <span sec:authorize="isAuthenticated()" th:text="${#authentication.name}"></span>님 환영합니다.
+            <tbody>
+            <tr th:each="question ,loop : ${myList}">
+                <td th:text="${loop.count}"></td>
+                <td>
+                    <a th:href="@{|/member/${question.getAuthor().getNickname()}/${question.getId()}|}" th:text="${question.getTitle()}"></a>
+                </td>
 
-                        </div>
+                <td><span th:if="${question.getAuthor() != null}" th:text="${question.getAuthor().getNickname()}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
 
-                    </li>
-
-                </ul>
-
-
-
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+                <td th:text="${#temporals.format(question.getCreateDate(), 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${question.view}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="container my-3">
-    <table class="table">
-        <thead class="table-dark">
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성 일시</th>
-            <th>조회 수</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="question ,loop : ${myList}">
-            <td th:text="${loop.count}"></td>
-            <td>
-                <a th:href="@{|/member/${question.getAuthor().getNickname()}/${question.getId()}|}" th:text="${question.getTitle()}"></a>
-            </td>
-
-            <td><span th:if="${question.getAuthor() != null}" th:text="${question.getAuthor().getNickname()}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
-
-            <td th:text="${#temporals.format(question.getCreateDate(), 'yyyy-MM-dd HH:mm')}"></td>
-        </tr>
-        </tbody>
-    </table>
-<!--    <a href="/member/myList" class="btn btn-primary">내글 보기</a>-->
-    <a href="/member/list" class="btn btn-primary">뒤로가기</a>
-</div>
+</html>

@@ -36,6 +36,7 @@ public class BoardListController {
         model.addAttribute("questionList" , questionList );
 
         model.addAttribute("loginUser" , loginUser );
+//        return "/domain/home/home/list";
         return "/domain/home/home/list";
     }
 
@@ -56,6 +57,7 @@ public class BoardListController {
         model.addAttribute("myList" , myList);
 
         return "/domain/home/home/myList";
+
     }
 
     /**
