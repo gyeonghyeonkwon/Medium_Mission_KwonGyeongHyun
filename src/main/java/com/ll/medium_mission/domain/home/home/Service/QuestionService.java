@@ -80,7 +80,7 @@ public class QuestionService {
     }
 
     /**
-     * 로그인 회원 글 불러 오기
+     *  나의 글 불러 오기
      */
     public List<Question>getUserMyList(String username) {
 
