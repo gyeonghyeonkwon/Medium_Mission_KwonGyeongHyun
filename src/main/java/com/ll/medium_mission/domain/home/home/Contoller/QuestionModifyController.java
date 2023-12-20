@@ -28,7 +28,7 @@ public class QuestionModifyController {
     private final QuestionService questionService;
     private final Rq rq;
     /**
-     * 게시판 아이디 를 조회 하여  제목 ,내용 을 불러 옴
+     * 게시판 아이디 를 조회 하여  제목 ,내용 , 체크 박스 를 불러 옴
      */
     @GetMapping("/member/modify/{id}")
     public String showModify(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm) {
@@ -38,6 +38,8 @@ public class QuestionModifyController {
         questionWriteForm.setTitle(question.getTitle());
 
         questionWriteForm.setContent(question.getContent());
+
+        questionWriteForm.setIsPublished(question.getIsPublished()); //저장 되어 있는 체크 여부를 불러옴
         return "domain/home/home/modify";
 
     }
@@ -55,7 +57,7 @@ public class QuestionModifyController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정권한이 없습니다.");
         }
         // 제목 , 내용 순으로 불러 와야 한다.
-        questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent());
+        questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent() , questionWriteForm.getIsPublished());
 
         // 글 수정 알림
         String msg="%d번게시물이생성되었습니다.".formatted(question.getId());

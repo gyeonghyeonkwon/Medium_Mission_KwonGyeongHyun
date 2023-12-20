@@ -64,10 +64,11 @@ public class QuestionService {
      *
      * 수정 내용 저장
      */
-    public void modifySave(Question question ,String title, String content ) {
+    public void modifySave(Question question ,String title, String content ,Boolean isPublished) {
         question.setTitle(title);
         question.setContent(content);
         question.setModifyDate(LocalDateTime.now());
+        question.setIsPublished(isPublished); // 체크 박스 수정
         this.questionRepository.save(question);
 
     }
