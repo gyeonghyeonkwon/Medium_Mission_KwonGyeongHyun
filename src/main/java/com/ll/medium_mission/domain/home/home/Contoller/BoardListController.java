@@ -32,7 +32,6 @@ public class BoardListController {
          *
          */
         List<Question> questionList = this.questionService.getList();
-//        List<Question> questionList = this.questionService.getUserMyListIsPublished(memberUser);
 
         String loginUser = memberUser.getUsername();
 
