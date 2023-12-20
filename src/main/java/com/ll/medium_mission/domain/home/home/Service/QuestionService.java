@@ -21,12 +21,13 @@ public class QuestionService {
     /**
      * 엔티티 DB에 저장
      */
-    public void write(String title, String content, MemberUser author) {
+    public void write(String title, String content, MemberUser author , Boolean isPublished) {
        Question q = new Question();
        q.setTitle(title);
        q.setContent(content);
        q.setCreateDate(LocalDateTime.now());
        q.setAuthor(author);
+       q.setIsPublished(isPublished); //체크 박스 true / false 를 받기 위함
         this.questionRepository.save(q);
     }
 
@@ -34,9 +35,11 @@ public class QuestionService {
      * 질문 게시글 리스트
      * <p>
      * 질문 DB 테이블 에 저장되어있는 데이터를 조회
+     * 체크박스 에 체크 가 되어 있지 않은 글들만 찾음
      */
     public List<Question> getList() {
-        return this.questionRepository.findAll();
+
+        return this.questionRepository.findByIsPublishedFalse();
     }
 
     /**
@@ -80,7 +83,7 @@ public class QuestionService {
     }
 
     /**
-     *  나의 글 불러 오기
+     *  최근 작성 순으로 나의 글 불러 오기
      */
     public List<Question>getUserMyList(String username) {
 
@@ -92,5 +95,6 @@ public class QuestionService {
 
         return userQuestions;
     }
+
 
 }

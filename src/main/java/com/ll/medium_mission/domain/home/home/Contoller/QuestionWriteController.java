@@ -40,12 +40,11 @@ public class QuestionWriteController {
      */
     @PostMapping("/member/write")
 
-    public String write(@Valid QuestionWriteForm questionWriteForm, Principal principal) {
+    public String write(@Valid QuestionWriteForm questionWriteForm, Principal principal , Model model) {
 
         MemberUser memberUser = this.memberService.getUser(principal.getName());
 
-        this.questionService.write(questionWriteForm.getTitle(), questionWriteForm.getContent(), memberUser);
-
+        this.questionService.write(questionWriteForm.getTitle(), questionWriteForm.getContent(), memberUser , questionWriteForm.getIsPublished());
         return rq.redirect("/member/list","게시물이 등록되었습니다.");
     }
 

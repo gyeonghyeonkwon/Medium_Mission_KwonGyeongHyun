@@ -22,4 +22,5 @@ public class QuestionWriteForm {
         @Size
         private String content;
 
+        private Boolean  isPublished;
 }

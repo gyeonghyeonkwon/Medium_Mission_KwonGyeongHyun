@@ -7,8 +7,13 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question , Long> {
     /**
-     * 최신날짜 순
+     * 나의 글 정보 최신날짜 순
      */
     List<Question> findByAuthor_NicknameOrderByCreateDateDesc(String username);
 
+    /**
+     *
+     * 체크박스 에 체크를 하지 않는 글 들만 불러 오기 위함
+     */
+    List<Question>findByIsPublishedFalse();
 }

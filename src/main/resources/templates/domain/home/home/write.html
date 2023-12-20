@@ -13,13 +13,24 @@
                 <input type="text" placeholder="제목을 입력해주세요" name="title" id="title" class="form-control input input-bordered input-secondary w-full mb-4">
             </div>
 
+
             <div class="mb-4 mx-auto max-w-md">
                 <label for="content" class="form-label">내용</label>
                 <textarea name="content" id="content" rows="5" placeholder="내용을 입력해주세요" class="form-control textarea textarea-secondary textarea-bordered textarea-lg w-full"></textarea>
             </div>
-            <div class="mb-4 mx-auto max-w-md">
+            <div class="flex justify-between items-center mb-4 mx-auto max-w-md ">
+            <div>
                 <input type="submit" value="등록" class="btn btn-success">
-                <a href="/member/list" class="btn btn-error">취소</a>
+                <a href="/member/list" class="btn btn-error ">취소</a>
+            </div>
+
+                <div>
+                    <div class="form-check">
+                        <input type="checkbox" id="isPublished"  name="isPublished" class="form-check-input">
+                        <input type="hidden" name="_isPublished" value="on">
+                        <label for="isPublished" class="form-check-label">비공개</label>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

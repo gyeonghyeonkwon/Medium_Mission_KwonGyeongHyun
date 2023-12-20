@@ -44,5 +44,7 @@ public class Question {
     @ManyToOne
     private MemberUser author;
 
+    @Column
+    private Boolean isPublished;  //boolean 은 맞으나 null 값을 허용 하기 위해 Boolean 으로 작성함
 
 }
