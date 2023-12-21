@@ -5,6 +5,9 @@ import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Repository.QuestionRepository;
 import com.ll.medium_mission.global.error.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,9 +40,11 @@ public class QuestionService {
      * 질문 DB 테이블 에 저장되어있는 데이터를 조회
      * 체크박스 에 체크 가 되어 있지 않은 글들만 찾음
      */
-    public List<Question> getList() {
+    public Page<Question> getList(int page) {
 
-        return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc();
+        Pageable pageable = PageRequest.of(page , 10); //페이지 당 글 10개씩 표시
+
+        return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc(pageable);
     }
 
     /**

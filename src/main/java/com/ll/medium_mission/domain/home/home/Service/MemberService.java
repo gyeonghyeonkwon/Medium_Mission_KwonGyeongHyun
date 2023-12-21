@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -23,6 +23,7 @@ public class MemberService {
      *  memberuser DB 저장
      *  비밀번호 암호화하여 db 저장
      */
+    @Transactional
     public MemberUser create (String username , String nickname ,String password) {
 
         MemberUser user = new MemberUser();
@@ -44,7 +45,6 @@ public class MemberService {
      * 중복된 아이디가 있으면 예외를 발생킨다.
      * joinController 에서 실행
      */
-
     public void findByNickname (MemberUserCreateForm memberUserCreateForm) {
 
         Optional<MemberUser> memberUser = memberRepository.findByNickname(memberUserCreateForm.getNickname());
@@ -59,6 +59,7 @@ public class MemberService {
      *
      * QuestionModifyController 에서 실행
      */
+    @Transactional
     public MemberUser getUser(String nickname) {
 
         Optional<MemberUser> findUser = memberRepository.findByNickname(nickname);
