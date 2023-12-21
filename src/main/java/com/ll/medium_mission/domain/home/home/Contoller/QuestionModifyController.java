@@ -39,12 +39,13 @@ public class QuestionModifyController {
 
         questionWriteForm.setContent(question.getContent());
 
-        questionWriteForm.setIsPublished(question.getIsPublished()); //저장 되어 있는 체크 여부를 불러옴
+        questionWriteForm.setIsPublished(question.getIsPublished()); //데이터 베이스에 저장 되어 있는 체크 여부를 불러옴
         return "domain/home/home/modify";
 
     }
 
     /**
+     * 게시글 수정 된 내용을 저장
      * 로그인 된 사용자만 이 수정이 가능하다
      *
      */
@@ -56,7 +57,7 @@ public class QuestionModifyController {
         if (!question.getAuthor().getNickname().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정권한이 없습니다.");
         }
-        // 제목 , 내용 순으로 불러 와야 한다.
+        // 제목 , 내용 , 체크 박스 순으로 불러 와야 한다.
         questionService.modifySave(question, questionWriteForm.getTitle(), questionWriteForm.getContent() , questionWriteForm.getIsPublished());
 
         // 글 수정 알림
