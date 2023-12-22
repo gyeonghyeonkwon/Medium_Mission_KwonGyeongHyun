@@ -23,7 +23,6 @@ public class MemberService {
      *  memberuser DB 저장
      *  비밀번호 암호화하여 db 저장
      */
-    @Transactional
     public MemberUser create (String username , String nickname ,String password) {
 
         MemberUser user = new MemberUser();
@@ -59,7 +58,6 @@ public class MemberService {
      *
      * QuestionModifyController 에서 실행
      */
-    @Transactional
     public MemberUser getUser(String nickname) {
 
         Optional<MemberUser> findUser = memberRepository.findByNickname(nickname);
