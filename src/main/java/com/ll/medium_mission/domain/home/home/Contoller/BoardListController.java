@@ -5,6 +5,7 @@ import com.ll.medium_mission.domain.home.home.Entity.Question;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.domain.home.home.Service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class BoardListController {
 
     private final QuestionService questionService;
@@ -35,11 +37,15 @@ public class BoardListController {
          * 엔티티 id 값을 엔티티의 이름을 알아내어 뷰로 전달
          *
          */
+
         Page<Question> questionList = this.questionService.getList(page);
+
+        int nowPage = questionList.getPageable().getPageNumber() +1 ; // 페이지 0 을 1로 설정
 
         String loginUser = memberUser.getUsername();
 
         model.addAttribute("questionList" , questionList );
+        model.addAttribute("nowPage" , nowPage );
         model.addAttribute("loginUser" , loginUser );
         return "/domain/home/home/list";
     }

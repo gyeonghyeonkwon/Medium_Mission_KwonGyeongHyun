@@ -1,4 +1,8 @@
 spring:
+  data:
+    web:
+     pageable:
+        one-indexed-parameters: true
   profiles:
     active: dev
     include: secret

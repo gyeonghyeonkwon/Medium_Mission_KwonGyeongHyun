@@ -42,7 +42,8 @@ public class QuestionService {
      */
     public Page<Question> getList(int page) {
 
-        Pageable pageable = PageRequest.of(page , 10); //페이지 당 글 10개씩 표시
+        Pageable pageable = PageRequest.of( page -1, 10); //페이지 당 글 10개씩 표시
+
 
         return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc(pageable);
     }

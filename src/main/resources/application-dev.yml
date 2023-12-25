@@ -1,6 +1,10 @@
 server:
   port: 8080
 spring:
+  #data:
+   # web:
+    #  pageable:
+     #   one-indexed-parameters: true
   thymeleaf:
     cache: false
   output:
