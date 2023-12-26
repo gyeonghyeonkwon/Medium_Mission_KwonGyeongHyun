@@ -28,8 +28,8 @@
             </div>
             <!--내가 작성한 아이디만  공개 여부 표시-->
             <span th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.nickname} " class="text-sm text-gray-500">
-                <span th:if="${question.getIsPublished()}">비공개 글</span>
-                <span th:unless="${question.getIsPublished()}">공개 글</span>
+                <span th:if="${question.getIsPublished()}">비공개 글</span> <!--체크가 되어 있을시-->
+                <span th:unless="${question.getIsPublished()}">공개 글</span> <!--체크가 안되어있을시-->
                 </span>
 
         </div>

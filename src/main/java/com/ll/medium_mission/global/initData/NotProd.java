@@ -20,7 +20,7 @@ public class NotProd {
 
         return args -> {
 
-            for (int i=1; i <= 30; i++) {
+            for (int i=1; i <= 100; i++) {
                 String nickname = "user" + i ;
                 String password = "111";
                 MemberUser memberUser = memberService.create("권경현", nickname , password);

@@ -22,5 +22,5 @@ public class QuestionWriteForm {
         @Size
         private String content;
 
-        private Boolean  isPublished;
+        private Boolean  isPublished; //체크박스
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
@@ -42,10 +44,10 @@ public class QuestionService {
      */
     public Page<Question> getList(int page) {
 
-        Pageable pageable = PageRequest.of( page -1, 10); //페이지 당 글 10개씩 표시
+        Pageable pageable = PageRequest.of( page -1, 10); //-1 은 타임 리프 페이지 번호와 -1 을 지정 안해주면 한칸 씩 뒤로 밀림 매핑 시키기 위함 , 페이지 당 글 10개씩 표시
 
 
-        return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc(pageable);
+        return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc(pageable); // 게시글 체크박스가 false 인경우 에만 전체 글에 불러옴
     }
 
     /**
@@ -53,6 +55,7 @@ public class QuestionService {
      *
      * 저장 되어 있는 게시글 클릭 시 조회수 1 씩 증가 (수정 예정)
      */
+    @Transactional
     public Question getQuestion(Long id) {
         Optional<Question> question = this.questionRepository.findById(id);
         if (question.isPresent()) {
