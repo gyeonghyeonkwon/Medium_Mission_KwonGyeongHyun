@@ -39,7 +39,7 @@
                 </li>
                 <li th:each="page: ${#numbers.sequence(1, questionList.totalPages)}"
                     th:classappend="${page == nowPage} ? 'btn-active'"
-                    class="join-item btn">
+                    class="join-item btn"> <!--현재페이지-->
                     <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
                 </li>
                 <li class="join-item" th:classappend="${!questionList.hasNext} ? 'btn-disabled'">
