@@ -23,7 +23,8 @@ public class SecurityConfig {
                 /**
                  *  해당 사이트 로그인 하지 않으면 url 로 접속 불가
                  */
-        http .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+        http
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers( "/member/list" ,"/member/write")
                         .authenticated()
                         .anyRequest().permitAll()
