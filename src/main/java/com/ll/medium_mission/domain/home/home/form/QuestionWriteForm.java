@@ -23,4 +23,7 @@ public class QuestionWriteForm {
         private String content;
 
         private Boolean  isPublished;
+
+
+
 }

@@ -28,6 +28,7 @@ public class BoardListController {
     /**
      *
      */
+
     @GetMapping("/member/list")
     public String showList(Model model , MemberUser memberUser , @RequestParam(value = "page" , defaultValue = "1") int page) {
         /**
