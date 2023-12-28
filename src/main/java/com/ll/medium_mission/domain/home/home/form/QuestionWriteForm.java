@@ -25,6 +25,7 @@ public class QuestionWriteForm {
 
         private Boolean  isPublished; //유료 회원
 
-        private Boolean isPaid; //유료 글 여부
+
+        private Boolean isPaid ; //유료 글 여부
 
 }

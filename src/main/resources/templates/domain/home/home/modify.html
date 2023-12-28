@@ -24,11 +24,12 @@
                 </div>
             <div> <!--체크 박스 True /false-->
                 <div class="form-check">
-                    <input type="checkbox" id="isPublished"  th:field="*{isPublished}" class="form-check-input">
+                    <input type="checkbox" id="isPublished" th:field="*{isPublished}" class="form-check-input">
                     <label for="isPublished" class="form-check-label">비공개</label>
 
-                    <input type="checkbox" id="isPaid"  th:field="*{isPaid}" class="form-check-input">
-                    <label for="isPaid" class="form-check-label">유료 전환</label>
+                    <div class="form-check" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PAID')">
+                        <input type="checkbox" id="isPaid" th:field="*{isPaid}" class="form-check-input">유료 전환
+                    </div>
                 </div>
             </div>
             </div>

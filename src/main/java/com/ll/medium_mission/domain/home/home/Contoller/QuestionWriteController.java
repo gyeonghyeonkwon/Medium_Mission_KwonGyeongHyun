@@ -54,6 +54,7 @@ public class QuestionWriteController {
      *URL 에 QUESTION ID 값을 매핑 시켜 해당하는 글을 보게한다.
      */
 
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ISPAID_MEMBER')")
     @GetMapping("/member/write/{id}")
     public String showWriteDetail(Model model, @PathVariable("id") Long id) {
         // 글 목록이 없으면 예외

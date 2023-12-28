@@ -26,11 +26,13 @@
                         <input type="hidden" name="_isPublished" value="secret">  <!--hidden 과 _isPublished 는 False -->
                         <label for="isPublished" class="form-check-label">비공개</label>
 
-                        <input type="checkbox" id="isPaid"  name="isPaid" class="form-check-input">
+
+                <div  class="form-check" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PAID')"> <!--ROLE_PAID , ROLE_ADMIN 권한이 존재 하는 회원만 보인다-->
+                <input type="checkbox" id="isPaid"  name="isPaid" class="form-check-input">
                         <input type="hidden" name="_isPaid" value="paid">  <!--hidden 과 _isPublished 는 False -->
                         <label for="isPaid" class="form-check-label">유료 전환</label>
                     </div>
-
+                    </div>
             </div>
         </form>
     </div>
