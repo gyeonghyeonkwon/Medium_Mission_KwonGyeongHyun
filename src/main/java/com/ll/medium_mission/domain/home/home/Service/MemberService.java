@@ -85,6 +85,9 @@ public class MemberService {
             throw new IllegalArgumentException("멤버를 찾을 수 없습니다");
     }
 
+    /**
+     * 전체 회원 조회
+     */
     public List<MemberUser> findMemberUser() {
 
         return memberRepository.findAll();

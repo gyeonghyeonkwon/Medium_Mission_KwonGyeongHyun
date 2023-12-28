@@ -14,7 +14,9 @@
         </div>
     </div>
     <div class="navbar-center">
-        <a href="/member/list" class="btn btn-ghost text-xl">미디엄</a>
+        <a sec:authorize="hasRole('ROLE_MEMBER') and not hasRole('ROLE_ADMIN')" href="/member/list" class="btn btn-ghost text-xl">미디엄</a>  <!--일반 사용자만 출력-->
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/member/admin" class="btn btn-ghost text-xl">미디엄 관리자 페이지</a> <!--관리자만 출력 -->
+
     </div>
     <div class="navbar-end">
         <div class="flex-none">
