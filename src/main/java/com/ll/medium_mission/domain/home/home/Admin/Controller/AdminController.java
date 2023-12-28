@@ -10,13 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+/**
+ * 관리자 페이지
+ */
 public class AdminController {
 
 private final MemberService memberService;
@@ -42,13 +44,13 @@ private final MemberService memberService;
 
 
         model.addAttribute("memberUser", _memberUser);
-        model.addAttribute("memberUserCreateForm", memberUserCreateForm); // 추가
+        model.addAttribute("memberUserCreateForm", memberUserCreateForm);
 
         return"domain/home/home/admin/adminDetailPage";
     }
 
     @PostMapping("/member/admin/{id}")
-    public String adminUpdate(@PathVariable("id") Long id , @RequestParam(name = "isPaid", required = false) boolean isPaid) {
+    public String adminUpdate(@PathVariable("id") Long id , boolean isPaid) {
 
            MemberUser memberUser = memberService.findById(id);
 
@@ -56,7 +58,6 @@ private final MemberService memberService;
 
             log.info("kkhispaid :" + isPaid);
 
-        // 업데이트 후 리다이렉트 또는 다른 처리를 수행할 수 있음
         return "redirect:/member/admin";
     }
 }

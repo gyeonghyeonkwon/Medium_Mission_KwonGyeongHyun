@@ -2,7 +2,7 @@
 
 <div layout:fragment="content" class="container my-5 mx-auto">
 
-    <form  method="post" th:object="${memberUserCreateForm}">
+    <form  method="post" >
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="overflow-x-auto">
         <table class="table table-zebra">
