@@ -25,8 +25,8 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
                 /**
-                 *  해당 사이트 로그인 하지 않으면 url 로 접속 불가하고
-                 *  일반사용자는 관리자페이지로 접근하지못한다
+                 *   익명 사용자는  member/list , member/write 로 접속 불가 하고
+                 *  익명사용자 및 일반사용자는 관리자페이지로 접근하지못한다
                  */
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests

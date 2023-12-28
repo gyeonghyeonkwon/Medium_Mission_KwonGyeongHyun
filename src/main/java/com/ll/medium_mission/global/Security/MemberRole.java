@@ -1,4 +1,4 @@
-package com.ll.medium_mission.global.Security;
+//package com.ll.medium_mission.global.Security;
 
 //@Getter
 //public enum MemberRole {

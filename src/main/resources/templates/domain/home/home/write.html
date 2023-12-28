@@ -3,8 +3,6 @@
 <div layout:fragment="content" class="container my-5 mx-auto">
 
     <div class="container">
-
-        <!--    <form th:action="@{/member/write}" th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">-->
         <form th:action="@{/member/write}"  th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">
 
             <div class="mb-4 mx-auto max-w-md ">
@@ -20,16 +18,19 @@
             </div>
             <div class="flex justify-between items-center mb-4 mx-auto max-w-md ">
             <div>
-                <input type="submit" value="등록" class="btn btn-success">
+                <button class="btn btn-neutral">등록</button>
                 <a href="/member/list" class="btn btn-error ">취소</a>
             </div>
-                <div> <!--체크 박스 True /false-->
                     <div class="form-check">
                         <input type="checkbox" id="isPublished"  name="isPublished" class="form-check-input">
-                        <input type="hidden" name="_isPublished" value="on">  <!--hidden 과 _isPublished 는 False -->
+                        <input type="hidden" name="_isPublished" value="secret">  <!--hidden 과 _isPublished 는 False -->
                         <label for="isPublished" class="form-check-label">비공개</label>
+
+                        <input type="checkbox" id="isPaid"  name="isPaid" class="form-check-input">
+                        <input type="hidden" name="_isPaid" value="paid">  <!--hidden 과 _isPublished 는 False -->
+                        <label for="isPaid" class="form-check-label">유료 전환</label>
                     </div>
-                </div>
+
             </div>
         </form>
     </div>

@@ -24,13 +24,14 @@ public class QuestionService {
     /**
      * 엔티티 DB에 저장
      */
-    public void write(String title, String content, MemberUser author , Boolean isPublished) {
-       Question q = new Question();
-       q.setTitle(title);
-       q.setContent(content);
-       q.setCreateDate(LocalDateTime.now());
-       q.setAuthor(author);
-       q.setIsPublished(isPublished); //체크 박스 true / false 를 받기 위함
+    public void write(String title, String content, MemberUser author, Boolean isPublished, Boolean isPaid) {
+        Question q = new Question();
+        q.setTitle(title);
+        q.setContent(content);
+        q.setCreateDate(LocalDateTime.now());
+        q.setAuthor(author);
+        q.setIsPublished(isPublished); // 공개 여부
+        q.setIsPaid(isPaid); //유료 여부
         this.questionRepository.save(q);
     }
 
@@ -43,7 +44,6 @@ public class QuestionService {
     public Page<Question> getList(int page) {
 
         Pageable pageable = PageRequest.of( page -1, 10); //페이지 당 글 10개씩 표시
-
 
         return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc(pageable);
     }
@@ -70,11 +70,12 @@ public class QuestionService {
      *
      * 수정 내용 저장
      */
-    public void modifySave(Question question ,String title, String content ,Boolean isPublished) {
+    public void modifySave(Question question ,String title, String content ,Boolean isPublished ,  Boolean isPaid) {
         question.setTitle(title);
         question.setContent(content);
         question.setModifyDate(LocalDateTime.now()); //수정일시 저장
-        question.setIsPublished(isPublished); // 체크 박스 수정
+        question.setIsPublished(isPublished); // 공개 여부 수정
+        question.setIsPaid(isPaid); // 유료 여부 수정
         this.questionRepository.save(question);
 
     }

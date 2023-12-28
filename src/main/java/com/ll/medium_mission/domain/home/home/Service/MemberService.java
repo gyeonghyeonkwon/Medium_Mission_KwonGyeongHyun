@@ -93,6 +93,9 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    /**
+     * 유료 회원 여부 저장
+     */
     @Transactional
     public void updateMemberIsPaid(MemberUser memberUser, boolean isPaid) {
 

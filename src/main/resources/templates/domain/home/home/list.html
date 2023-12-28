@@ -10,6 +10,7 @@
                 <th>번호</th>
                 <th>제목</th>
                 <th>작성자</th>
+                <th>유료글</th>
                 <th>작성 일시</th>
                 <th>조회 수</th>
             </tr>
@@ -19,12 +20,17 @@
             <tr th:each="question ,loop : ${questionList}">
                 <td th:text="${questionList.getTotalElements - (questionList.number * questionList.size) - loop.index}"></td> <!--게시물 번호 나열-->
 
-                <td>
-                    <a th:href="@{|/member/write/${question.id}|}" th:text="${question.title}"></a>
-                </td>
+                <td>  <a th:href="@{|/member/write/${question.id}|}" th:text="${question.title}"></a> </td><!--글 제목에 링크 설정 -->
 
                 <td><span th:if="${question.author != null}" th:text="${question.author.nickname}"></span></td><!--MemberUser 테이블에 있는 작성자 -->
+
+                <td>
+                    <span th:if="${question.getIsPaid()}">유료</span>
+                    <span th:unless="${question.getIsPaid()}">무료</span>
+                </td>
+
                 <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+
                 <td th:text="${question.view}"></td>
             </tr>
 

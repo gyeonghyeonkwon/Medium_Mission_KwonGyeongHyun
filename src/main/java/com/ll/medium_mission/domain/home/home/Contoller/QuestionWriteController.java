@@ -37,6 +37,7 @@ public class QuestionWriteController {
     /**
      * DTO를 받아 db에 저장
      *
+     *
      */
     @PostMapping("/member/write")
 
@@ -44,7 +45,7 @@ public class QuestionWriteController {
 
         MemberUser memberUser = this.memberService.getUser(principal.getName());
 
-        this.questionService.write(questionWriteForm.getTitle(), questionWriteForm.getContent(), memberUser , questionWriteForm.getIsPublished());
+        this.questionService.write(questionWriteForm.getTitle(), questionWriteForm.getContent(), memberUser , questionWriteForm.getIsPublished() , questionWriteForm.getIsPaid());
         return rq.redirect("/member/list","게시물이 등록되었습니다.");
     }
 

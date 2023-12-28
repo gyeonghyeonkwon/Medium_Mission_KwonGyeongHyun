@@ -31,7 +31,7 @@ public class MemberUser {
     @Column
     private String password; //패스워드
 
-    private boolean isPaid; //유료회원 여부
+    private boolean isPaid; //유료 회원 여부
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
