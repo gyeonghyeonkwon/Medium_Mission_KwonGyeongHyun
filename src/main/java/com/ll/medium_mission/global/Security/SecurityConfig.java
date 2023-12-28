@@ -25,12 +25,15 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
                 /**
-                 *  해당 사이트 로그인 하지 않으면 url 로 접속 불가
+                 *  해당 사이트 로그인 하지 않으면 url 로 접속 불가하고
+                 *  일반사용자는 관리자페이지로 접근하지못한다
                  */
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers( "/member/list" ,"/member/write")
-                        .authenticated()
+                        .authenticated()// 로그인 하지않으면 접근 불가
+                        .requestMatchers("/member/admin/**" )
+                        .hasRole("ADMIN")
                         .anyRequest().permitAll()
 
                 )

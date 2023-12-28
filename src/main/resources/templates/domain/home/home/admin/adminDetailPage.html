@@ -28,16 +28,15 @@
                 <td><span th:text="${memberUser.isPaid()}"></span></td>
                 <td>
                     <div class="form-check">
-                        <input type="checkbox" id="isPaid" name="isPaid" th:checked="${memberUser.isPaid}"/>
-
+                        <input type="checkbox" id="isPaid" name="isPaid" th:checked="${memberUser.isPaid}" />
                     </div>
                 </td>
             </tr>
-
-
             </tbody>
         </table>
-            <button class="btn btn-active btn-neutral">업데이트</button>
+            <div class="justify-end">
+                <button class="btn btn-active btn-neutral">업데이트</button>
+            </div>
         </div>
     </form>
 </div>

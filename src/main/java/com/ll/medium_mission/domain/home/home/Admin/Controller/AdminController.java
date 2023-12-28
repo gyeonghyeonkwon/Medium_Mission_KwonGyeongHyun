@@ -2,7 +2,6 @@ package com.ll.medium_mission.domain.home.home.Admin.Controller;
 
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
-import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,6 @@ import java.util.List;
 public class AdminController {
 
 private final MemberService memberService;
-
     @GetMapping("/member/admin")
     public String showAdmin(Model model) {
         List<MemberUser>memberUserList = this.memberService.findMemberUser();
@@ -32,19 +30,13 @@ private final MemberService memberService;
         return "domain/home/home/admin/adminPage";
 
     }
+
     @GetMapping("/member/admin/{id}")
     public String showAdminModify(@PathVariable("id") Long id, Model model) {
 
-
         MemberUser _memberUser = this.memberService.findById(id);
 
-        MemberUserCreateForm memberUserCreateForm = new MemberUserCreateForm();
-
-        memberUserCreateForm.setPaid(_memberUser.isPaid());
-
-
         model.addAttribute("memberUser", _memberUser);
-        model.addAttribute("memberUserCreateForm", memberUserCreateForm);
 
         return"domain/home/home/admin/adminDetailPage";
     }

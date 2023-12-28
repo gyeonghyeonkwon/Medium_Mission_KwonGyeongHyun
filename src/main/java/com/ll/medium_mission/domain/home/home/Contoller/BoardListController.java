@@ -38,13 +38,9 @@ public class BoardListController {
          * 엔티티 id 값을 엔티티의 이름을 알아내어 뷰로 전달
          *
          */
-
         Page<Question> questionList = this.questionService.getList(page);
-
         int nowPage = questionList.getPageable().getPageNumber() +1 ; // 페이지 0 을 1로 설정
-
         String loginUser = memberUser.getUsername();
-
         model.addAttribute("questionList" , questionList );
         model.addAttribute("nowPage" , nowPage );
         model.addAttribute("loginUser" , loginUser );

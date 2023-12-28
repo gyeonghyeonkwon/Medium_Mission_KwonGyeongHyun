@@ -23,6 +23,7 @@
                 <td><a th:href="@{|/member/admin/${memberUser.id}|}" th:text="${memberUser.nickname}"></a></td>
                 <td><span th:text="${memberUser.getAuthorities()}"></span></td>
                 <td>
+                    <span th:if="${memberUser.getNickname().equals('admin')}">관리자</span>
                     <span th:if="${memberUser.isPaid()}">유료 회원</span>
                     <span th:unless="${memberUser.isPaid()}">일반 회원</span>
 
