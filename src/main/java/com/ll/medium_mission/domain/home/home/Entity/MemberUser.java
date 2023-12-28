@@ -47,8 +47,6 @@ public class MemberUser {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
-
-
         return authorities;
     }
 }

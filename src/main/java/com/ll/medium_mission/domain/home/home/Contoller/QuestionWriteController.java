@@ -40,7 +40,7 @@ public class QuestionWriteController {
      */
     @PostMapping("/member/write")
 
-    public String write(@Valid QuestionWriteForm questionWriteForm, Principal principal , Model model) {
+    public String write(@Valid QuestionWriteForm questionWriteForm, Principal principal) {
 
         MemberUser memberUser = this.memberService.getUser(principal.getName());
 

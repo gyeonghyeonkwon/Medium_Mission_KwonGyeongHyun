@@ -9,7 +9,7 @@
                 <li><a href="/member/list">전체글</a></li>
                 <li><a href="/member/write">글작성</a></li>
                 <li><a href="/member/myList">나의글</a></li>
-                <li><a>About</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/member/admin">관리자 페이지</a></li>
             </ul>
         </div>
     </div>

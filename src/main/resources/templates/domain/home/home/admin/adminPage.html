@@ -1,0 +1,32 @@
+<html layout:decorate="~{domain/home/home/layout}">
+
+<div layout:fragment="content" class="container my-5 mx-auto">
+
+        <div class="overflow-x-auto">
+        <table class="table table-zebra">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>닉네임</th>
+                <th>현재 권한</th>
+                <th>유료 회원 여부</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- row 1 -->
+            <tr th:each="memberUser ,loop : ${memberUserList}">
+
+                <td><span th:text="${memberUser.id}"></span></td>
+                <td><span th:text="${memberUser.username}"></span></td>
+                <td><a th:href="@{|/member/admin/${memberUser.id}|}" th:text="${memberUser.nickname}"></a></td>
+                <td><span th:text="${memberUser.getAuthorities()}"></span></td>
+                <td><span th:text="${memberUser.isPaid()}"></span></td>
+
+            </tr>
+
+            </tbody>
+        </table>
+        </div>
+</div>

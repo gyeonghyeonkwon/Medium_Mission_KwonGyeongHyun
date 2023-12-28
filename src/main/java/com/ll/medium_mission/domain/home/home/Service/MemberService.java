@@ -4,10 +4,12 @@ import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
 import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,9 +21,13 @@ public class MemberService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private Session entityManager;
+    ;
+
     /**
      *  memberuser DB 저장
      *  비밀번호 암호화하여 db 저장
+     *  회원가입시 저장
      */
     public MemberUser create (String username , String nickname ,String password) {
 
@@ -68,10 +74,29 @@ public class MemberService {
         throw new IllegalArgumentException("아이디가 존재합니다.");
     }
 
-    public Optional<MemberUser> findById(long id) {
-        return memberRepository.findById(id);
+    /**
+     * 멤버 아이디
+     */
+    public MemberUser findById(Long id) {
+        Optional<MemberUser> memberUser = this.memberRepository.findById(id);
+        if(memberUser.isPresent()){
+            return memberUser.get();
+        }
+            throw new IllegalArgumentException("멤버를 찾을 수 없습니다");
     }
 
+    public List<MemberUser> findMemberUser() {
+
+        return memberRepository.findAll();
+    }
+
+    @Transactional
+    public void updateMemberIsPaid(MemberUser memberUser, boolean isPaid) {
+
+        memberUser.setPaid(isPaid);
+        memberRepository.save(memberUser);
+
+    }
 }
 
 

@@ -73,7 +73,7 @@ public class QuestionService {
     public void modifySave(Question question ,String title, String content ,Boolean isPublished) {
         question.setTitle(title);
         question.setContent(content);
-        question.setModifyDate(LocalDateTime.now());
+        question.setModifyDate(LocalDateTime.now()); //수정일시 저장
         question.setIsPublished(isPublished); // 체크 박스 수정
         this.questionRepository.save(question);
 
