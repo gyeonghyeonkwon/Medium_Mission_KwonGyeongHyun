@@ -10,7 +10,6 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +21,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @ToString
 @Slf4j
-@Transactional(readOnly = true)
 public class QuestionModifyController {
 
     private final QuestionService questionService;
@@ -31,7 +29,6 @@ public class QuestionModifyController {
      * 게시판 아이디 를 조회 하여  제목 ,내용 , 체크 박스 를 불러 옴
      * 데이터 베이스에 저장 되어 있는 체크 여부를 불러옴
      */
-    @Transactional
     @GetMapping("/member/modify/{id}")
     public String showModify(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm) {
 
@@ -53,7 +50,6 @@ public class QuestionModifyController {
      * 로그인 된 사용자만 이 수정이 가능하다
      *
      */
-    @Transactional
     @PostMapping("/member/modify/{id}")
     public String update(@PathVariable("id") Long id, @Valid QuestionWriteForm questionWriteForm, Principal principal) {
 

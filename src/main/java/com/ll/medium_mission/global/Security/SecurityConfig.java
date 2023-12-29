@@ -71,7 +71,9 @@ public class SecurityConfig{
         ;
 
 
-
+        /**
+         * 로그인 세션 종료 시 동작
+         */
         http.exceptionHandling(Exception ->Exception
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
