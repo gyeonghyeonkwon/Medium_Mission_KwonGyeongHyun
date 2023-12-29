@@ -10,11 +10,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -53,16 +56,26 @@ public class QuestionWriteController {
      *
      *URL 에 QUESTION ID 값을 매핑 시켜 해당하는 글을 보게한다.
      */
-
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ISPAID_MEMBER')")
     @GetMapping("/member/write/{id}")
-    public String showWriteDetail(Model model, @PathVariable("id") Long id) {
+    public String showWriteDetail(Model model, @PathVariable("id") Long id , Authentication authentication) {
         // 글 목록이 없으면 예외
         Question question = this.questionService.getQuestion(id);
 
         model.addAttribute("question", question);
 
-        return "domain/home/home/detailWrite";
+    try {
+
+        if (question.getIsPaid() && !memberService.isPaidMember(authentication)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "유료 회원 전용 글 입니다. ");
+        }
     }
+        catch (NullPointerException e){
+            return "domain/home/home/detailWrite";
+
+        }
+
+            return "domain/home/home/detailWrite";
+    }
+
 
 }

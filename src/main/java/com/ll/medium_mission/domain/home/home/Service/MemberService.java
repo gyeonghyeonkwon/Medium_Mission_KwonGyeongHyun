@@ -5,6 +5,7 @@ import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
 import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,8 +101,21 @@ public class MemberService {
     public void updateMemberIsPaid(MemberUser memberUser, boolean isPaid) {
 
         memberUser.setPaid(isPaid);
-        memberRepository.save(memberUser);
+        memberRepository.save(memberUser); //isPaid 수정
+    }
 
+    /**
+     * 사용자 권한 확인
+     */
+    public Boolean isPaidMember(Authentication authentication) {
+        // 인증 객체에서 사용자명(username)을 가져옴
+        String nickname = authentication.getName();
+
+        // 사용자명을 기반으로 멤버 정보를 가져옴
+        MemberUser memberUser = getUser(nickname);
+
+        // 멤버 정보가 있고, 유료 멤버십 상태라면 true 반환
+        return memberUser != null && memberUser.isPaid();
     }
 }
 
