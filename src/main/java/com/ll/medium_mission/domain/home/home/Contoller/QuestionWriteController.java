@@ -10,14 +10,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -66,7 +64,8 @@ public class QuestionWriteController {
     try {
 
         if (question.getIsPaid() && !memberService.isPaidMember(authentication)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "유료 회원 전용 글 입니다. ");
+//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "유료 회원 전용 글 입니다. ");
+                model.addAttribute("isPaidMsg" , "유료 글 입니다. ")    ;
         }
     }
         catch (NullPointerException e){

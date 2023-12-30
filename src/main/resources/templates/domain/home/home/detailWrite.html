@@ -37,10 +37,13 @@
 <!--                <span th:unless="${question.getIsPublished()}">공개 글</span>-->
 <!--                </span>-->
         </div>
-
+        <!--글 내용 -->
         <div class="my-3 pb-3 border-b-2  text-center">
             <div class="p-4 mb-5 text-left whitespace-pre-line">
-                <div class="text-gray-800 " th:text="${question.content}"></div>
+                <div class=" font-bold text-lg modal-box" style="color: #dc3545;"  th:if="${isPaidMsg}" th:text="${isPaidMsg}" ></div>
+
+                <div class="text-gray-800 " th:unless="${isPaidMsg}" th:text="${question.content}"></div>
+
             </div>
         </div>
 
