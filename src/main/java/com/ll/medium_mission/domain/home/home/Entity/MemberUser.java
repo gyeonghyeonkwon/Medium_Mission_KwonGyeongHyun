@@ -44,7 +44,7 @@ public class MemberUser {
         }
 
         if ("admin".equals(nickname)) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN")); //admin 이라는 닉네임으로 생성 되면  관리자 권한을 얻는다
         }
 
         return authorities;

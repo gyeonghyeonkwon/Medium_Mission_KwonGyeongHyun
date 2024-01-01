@@ -41,6 +41,9 @@ private final MemberService memberService;
         return"domain/home/home/admin/adminDetailPage";
     }
 
+    /**
+     * 회원 엔티티 isPaid 의 정보를 수정
+     */
     @PostMapping("/member/admin/{id}")
     public String adminUpdate(@PathVariable("id") Long id , boolean isPaid) {
 

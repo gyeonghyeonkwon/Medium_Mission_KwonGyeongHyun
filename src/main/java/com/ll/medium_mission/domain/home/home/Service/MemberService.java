@@ -30,7 +30,7 @@ public class MemberService {
      *  비밀번호 암호화하여 db 저장
      *  회원가입시 저장
      */
-    public MemberUser create (String username , String nickname ,String password) {
+    public MemberUser create (String username , String nickname , String password) {
 
         MemberUser user = new MemberUser();
 
