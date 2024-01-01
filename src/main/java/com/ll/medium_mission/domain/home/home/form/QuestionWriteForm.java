@@ -23,7 +23,7 @@ public class QuestionWriteForm {
         @Size
         private String content;
 
-        private Boolean  isPublished; //유료 회원
+        private Boolean  isPublished; // 공개 여부
 
 
         private Boolean isPaid ; //유료 글 여부
