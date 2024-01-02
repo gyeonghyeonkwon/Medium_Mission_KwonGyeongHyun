@@ -19,7 +19,7 @@ public class NotProd {
     public ApplicationRunner initNotProd(MemberService memberService , QuestionService questionService ) {
 
         return args -> {
-            MemberUser memberAdmin =  memberService.create("권경현" , "admin" , "111"); //관리자 계정
+            MemberUser memberAdmin =  memberService.create("admin" , "admin" , "111"); //관리자 계정
             memberService.updateMemberIsPaid(memberAdmin , true); //유료 권한
             for (int i=1; i <= 100; i++) {
                 String nickname = "user" + i ;

@@ -36,7 +36,12 @@
                             <span sec:authorize="isAuthenticated()" th:text="${#authentication.name}"></span>님
                         </a>
                     </li>
-                    <li><a>Settings</a></li>
+                    <li>
+                        <span sec:authorize="hasRole('ROLE_ADMIN')">관리자</span>
+                        <span th:if="${#authorization.expression('hasRole(''ROLE_PAID'')')}">유료 회원</span> <!-- ROLE_PAID 권한이 존재 하면 유료 회원 -->
+                        <span th:unless="${#authorization.expression('hasRole(''ROLE_PAID'')')}">일반 회원</span> <!-- ROLE_PAID 권한이 존재 하면 유료 회원 -->
+                    </li>
+
                     <li><a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a></li>
                 </ul>
             </div>

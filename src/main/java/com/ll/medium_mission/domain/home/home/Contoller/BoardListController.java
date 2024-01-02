@@ -53,7 +53,7 @@ public class BoardListController {
      *  자신의 계정이 아니면 게시글을 볼수 없다.
      */
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()") //로그인 사용자
     @GetMapping("/member/myList")
     public String showMyList(Model model , Principal principal) {
 
