@@ -4,13 +4,13 @@ import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,9 +22,11 @@ public class AdminController {
 
 private final MemberService memberService;
     @GetMapping("/member/admin")
-    public String showAdmin(Model model) {
-        List<MemberUser>memberUserList = this.memberService.findMemberUser();
+    public String showAdmin(Model model , @RequestParam(value = "page" , defaultValue = "1") int page) {
+        Page<MemberUser> memberUserList = this.memberService.getMemberUserList(page);
+        int nowPage = memberUserList.getPageable().getPageNumber() +1 ;
 
+        model.addAttribute("nowPage" , nowPage);
         model.addAttribute("memberUserList" , memberUserList);
 
         return "domain/home/home/admin/adminPage";

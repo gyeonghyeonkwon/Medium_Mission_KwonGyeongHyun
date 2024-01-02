@@ -5,12 +5,14 @@ import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
 import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -89,9 +91,11 @@ public class MemberService {
     /**
      * 전체 회원 조회
      */
-    public List<MemberUser> findMemberUser() {
+    public Page<MemberUser> getMemberUserList(int page) {
 
-        return memberRepository.findAll();
+        Pageable pageable = PageRequest.of( page -1, 10); //페이지 당 글 10개씩 표시
+
+        return memberRepository.findAll(pageable);
     }
 
     /**
