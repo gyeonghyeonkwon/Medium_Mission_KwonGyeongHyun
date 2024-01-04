@@ -64,7 +64,6 @@ public class QuestionWriteController {
     try {
 
         if (question.getIsPaid() && !memberService.isPaidMember(authentication)) {
-//            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "유료 회원 전용 글 입니다. ");
                 model.addAttribute("isPaidMsg" , "이 글은 유료 멤버십 전용 입니다. ")    ;
         }
     }

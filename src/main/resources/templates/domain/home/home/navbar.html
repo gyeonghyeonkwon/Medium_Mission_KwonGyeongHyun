@@ -38,8 +38,8 @@
                     </li>
                     <li>
                         <span sec:authorize="hasRole('ROLE_ADMIN')">관리자</span>
-                        <span sec:authorize="!hasRole('ROLE_ADMIN') and hasRole('ROLE_PAID')">유료회원</span> <!-- ADMIN 권한이 없고 PAID  권한이 있으면 유료 -->
-                        <span sec:authorize="!hasRole('ROLE_PAID') and hasRole('ROLE_MEMBER')">일반회원</span> <!-- ROLE_PAID 권한이 없고 MEMBER 권한 만 있으면 일반 회원 -->
+                        <span sec:authorize="!hasRole('ROLE_ADMIN') and hasRole('ROLE_PAID')">유료 회원</span> <!-- ADMIN 권한이 없고 PAID  권한이 있으면 유료 -->
+                        <span sec:authorize="!hasRole('ROLE_PAID') and hasRole('ROLE_MEMBER')">일반 회원</span> <!-- ROLE_PAID 권한이 없고 MEMBER 권한 만 있으면 일반 회원 -->
                     </li>
 
                     <li><a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a></li>

@@ -56,20 +56,47 @@
         <div class="join flex justify-center mt-5">
             <div>
                 <div>
-                    <input class="input input-bordered join-item" placeholder="Search"/>
+                    <input class="input input-bordered join-item form-control"  id="search_kw" th:value="${kw}" placeholder="Search"/>
                 </div>
             </div>
             <select class="select select-bordered join-item">
                 <option disabled selected>Filter</option>
-                <option>Sci-fi</option>
-                <option>Drama</option>
-                <option>Action</option>
+                <option>제목</option>
+                <option>내용</option>
+                <option>작성자</option>
+                <option>제목+내용</option>
             </select>
             <div class="indicator">
-                <button class="btn join-item">Search</button>
+                <button class="btn join-item" id="btn_search">Search</button>
             </div>
         </div>
         <!--검색창 끝-->
     </div>
+    <form th:action="@{/member/list}" method="get" id="searchForm">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${questionList.number}">
+
+    </form>
 </div>
+
+
+
 </html>
+
+<script>
+    const page_elements = document.getElementsByClassName("page-link btn");
+    Array.from(page_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById('page').value = this.dataset.page;
+            document.getElementById('searchForm').submit();
+        });
+    });
+
+    const btn_search = document.getElementById("btn_search");
+    btn_search.addEventListener('click', function() {
+        document.getElementById('kw').value = document.getElementById('search_kw').value;
+        document.getElementById('page').value = 1;  // 검색 버튼을 클릭할 경우 1페이지부터 조회합니다.
+        document.getElementById('searchForm').submit();
+    });
+</script>
+

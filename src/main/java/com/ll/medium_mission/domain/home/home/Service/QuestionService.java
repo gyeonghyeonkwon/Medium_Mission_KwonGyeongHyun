@@ -41,11 +41,13 @@ public class QuestionService {
      * 질문 DB 테이블 에 저장되어있는 데이터를 조회
      * 체크박스 에 체크 가 되어 있지 않은 글들만 찾음
      */
-    public Page<Question> getList(int page) {
+    public Page<Question> getList(int page , String kw) {
 
         Pageable pageable = PageRequest.of( page -1, 10); //페이지 당 글 10개씩 표시
 
-        return this.questionRepository.findByIsPublishedFalseOrderByCreateDateDesc(pageable);
+//        Specification<Question> spec = search(kw);
+
+        return this.questionRepository.findAll(kw, pageable);
     }
 
     /**
@@ -103,6 +105,7 @@ public class QuestionService {
 
         return userQuestions;
     }
+
 
 
 }
