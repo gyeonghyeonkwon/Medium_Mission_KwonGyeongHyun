@@ -32,5 +32,4 @@ public class MemberUserCreateForm {
     @NotBlank(message = "비밀번호 확인란을 입력해주세요.")
     @Size(min = 3 , max = 20)
     private String passwordConfirm;
-
 }

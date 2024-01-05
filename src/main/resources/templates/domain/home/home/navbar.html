@@ -9,18 +9,20 @@
                 <li><a href="/member/list">전체글</a></li>
                 <li><a href="/member/write">글작성</a></li>
                 <li><a href="/member/myList">나의글</a></li>
-                <li><a>About</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/member/admin">관리자 페이지</a></li>
             </ul>
         </div>
     </div>
     <div class="navbar-center">
-        <a href="/member/list" class="btn btn-ghost text-xl">미디엄</a>
+        <a sec:authorize="hasRole('ROLE_MEMBER') and not hasRole('ROLE_ADMIN')" href="/member/list" class="btn btn-ghost text-xl">미디엄</a>  <!--일반 사용자만 출력-->
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/member/admin" class="btn btn-ghost text-xl">미디엄 관리자 페이지</a> <!--관리자만 출력 -->
     </div>
-    <div class="navbar-end">
-        <div class="flex-none">
-            <div class="dropdown dropdown-end">
 
-            </div>
+    <div class="navbar-end">
+
+
+        <div class="flex-none">
+
             <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
@@ -34,7 +36,12 @@
                             <span sec:authorize="isAuthenticated()" th:text="${#authentication.name}"></span>님
                         </a>
                     </li>
-                    <li><a>Settings</a></li>
+                    <li>
+                        <span sec:authorize="hasRole('ROLE_ADMIN')">관리자</span>
+                        <span sec:authorize="!hasRole('ROLE_ADMIN') and hasRole('ROLE_PAID')">유료 회원</span> <!-- ADMIN 권한이 없고 PAID  권한이 있으면 유료 -->
+                        <span sec:authorize="!hasRole('ROLE_PAID') and hasRole('ROLE_MEMBER')">일반 회원</span> <!-- ROLE_PAID 권한이 없고 MEMBER 권한 만 있으면 일반 회원 -->
+                    </li>
+
                     <li><a onclick="return confirm('로그아웃 하시겠나요?');" class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그 아웃</a></li>
                 </ul>
             </div>

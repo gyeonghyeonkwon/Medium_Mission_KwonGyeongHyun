@@ -56,7 +56,8 @@ public class MemberJoinController {
             //아이디가 중복 되지 않는다면 아이디생성
             this.memberService.create(memberUserCreateForm.getUsername(), memberUserCreateForm.getNickname(), memberUserCreateForm.getPassword());
 
-            return rq.redirect("/member/login" , "회원가입이성공하였습니다, 로그인 후 사용 해주세요.");
+            return rq.redirect("/member/login" , ("%s 님 회원가입이 성공 하였습니다. " +
+                    " 로그인 후 사용 해주세요.").formatted(memberUserCreateForm.getNickname()));
         }
         //  에러를 model 에 담아 타임 리프 로 전달
         catch (IllegalArgumentException e) {
