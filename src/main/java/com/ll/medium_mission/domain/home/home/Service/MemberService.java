@@ -25,7 +25,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     private Session entityManager;
-    ;
+
 
     /**
      *  memberuser DB 저장

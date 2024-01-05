@@ -60,7 +60,7 @@
                 </div>
             </div>
             <!--select box-->
-            <select class="select select-bordered join-item" id="searchTarget">
+            <select class="select select-bordered join-item" id="searchType">
                 <option disabled selected>Filter</option>
                 <option th:value="'title'">제목</option>
                 <option th:value="'content'">내용</option>
@@ -76,7 +76,7 @@
     <form th:action="@{/member/list}" method="get" id="searchForm">
         <input type="hidden" id="kw" name="kw" th:value="${kw}">
         <input type="hidden" id="page" name="page" th:value="${questionList.number}">
-        <input type="hidden" id="searchTargetHidden" name="searchTarget">
+        <input type="hidden" id="searchTypeHidden" name="searchType">
     </form>
 </div>
 
@@ -88,11 +88,11 @@
 
     // 페이지 로드 시 세션 스토리지에서 검색 조건 읽어오기
     window.onload = function() {
-        const storedSearchTarget = sessionStorage.getItem('searchTarget');
+        const storedSearchTarget = sessionStorage.getItem('searchType');
         const storedKw = sessionStorage.getItem('kw');
 
         if (storedSearchTarget) {
-            document.getElementById("searchTarget").value = storedSearchTarget;
+            document.getElementById("searchType").value = storedSearchTarget;
         }
 
         if (storedKw) {
@@ -115,24 +115,24 @@
     btn_search.addEventListener('click', function() {
         document.getElementById('kw').value = document.getElementById('search_kw').value;
         saveSearchCondition();
-        document.getElementById('page').value = 1;  // 검색 버튼을 클릭할 경우 1페이지부터 조회합니다.
+        document.getElementById('page').value = 1;  // 검색 버튼을 클릭할 경우 1페이지부터 조회
         document.getElementById('searchForm').submit();
     });
 
     // 검색 조건을 세션 스토리지에 저장하는 함수
     function saveSearchCondition() {
-        const selectedTarget = document.getElementById("searchTarget").value;
+        const selectedTarget = document.getElementById("searchType").value;
         const searchInput = document.getElementById("search_kw").value;
 
         // 검색 조건 세션 스토리지에 저장
-        sessionStorage.setItem('searchTarget', selectedTarget);
+        sessionStorage.setItem('searchType', selectedTarget);
         sessionStorage.setItem('kw', searchInput);
     }
 
     // 검색 조건을 폼에 설정하고 제출하는 함수
     function submitForm() {
-        const selectedValue = document.getElementById("searchTarget").value;
-        document.getElementById("searchTargetHidden").value = selectedValue;
+        const selectedValue = document.getElementById("searchType").value;
+        document.getElementById("searchTypeHidden").value = selectedValue;
         saveSearchCondition();
         document.getElementById("searchForm").submit();
     }

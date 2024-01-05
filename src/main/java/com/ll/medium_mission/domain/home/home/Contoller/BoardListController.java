@@ -31,7 +31,7 @@ public class BoardListController {
 
     @GetMapping("/member/list")
     public String showList(Model model , MemberUser memberUser , @RequestParam(value = "page" , defaultValue = "1") int page ,
-                                @RequestParam(value = "kw", defaultValue = "") String kw ){
+                                @RequestParam(value = "kw", defaultValue = "") String kw , @RequestParam(name = "searchType", defaultValue = "title") String searchType){
         /**
          * 게시글 리스트
          * 질문 DB 테이블 에 저장 되어 있는 데이터를 조회 하여 뷰로 전달.
@@ -39,7 +39,7 @@ public class BoardListController {
          * 엔티티 id 값을 엔티티의 이름을 알아내어 뷰로 전달
          *
          */
-        Page<Question> questionList = this.questionService.getList(page , kw);
+        Page<Question> questionList = this.questionService.getList(page , kw , searchType);
         int nowPage = questionList.getPageable().getPageNumber() +1 ; // 페이지 0 을 1로 설정
         String loginUser = memberUser.getUsername();
         model.addAttribute("questionList" , questionList );
