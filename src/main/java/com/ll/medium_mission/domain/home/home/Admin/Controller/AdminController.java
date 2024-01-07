@@ -2,7 +2,9 @@ package com.ll.medium_mission.domain.home.home.Admin.Controller;
 
 import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
+import com.ll.medium_mission.global.Rq;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -15,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@ToString
 /**
  * 관리자 페이지
  */
 public class AdminController {
 
 private final MemberService memberService;
+private final Rq rq;
+
     @GetMapping("/member/admin")
     public String showAdmin(Model model , @RequestParam(value = "page" , defaultValue = "1") int page) {
         Page<MemberUser> memberUserList = this.memberService.getMemberUserList(page);
@@ -55,6 +60,7 @@ private final MemberService memberService;
 
             log.info("kkhispaid :" + isPaid);
 
-        return "redirect:/member/admin";
+
+        return rq.redirect("/member/admin" , "%s님 권한 이 수정 되었습니다.".formatted(memberUser.getNickname()));
     }
 }

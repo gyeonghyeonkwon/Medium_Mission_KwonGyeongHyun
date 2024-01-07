@@ -31,7 +31,7 @@ public class BoardListController {
 
     @GetMapping("/member/list")
     public String showList(Model model , MemberUser memberUser , @RequestParam(value = "page" , defaultValue = "1") int page ,
-                                @RequestParam(value = "kw", defaultValue = "") String kw , @RequestParam(name = "searchType", defaultValue = "title") String searchType){
+                           @RequestParam(value = "kw", defaultValue = "") String kw , @RequestParam (name = "searchType" , defaultValue = "title") String searchType ){
         /**
          * 게시글 리스트
          * 질문 DB 테이블 에 저장 되어 있는 데이터를 조회 하여 뷰로 전달.
@@ -45,7 +45,10 @@ public class BoardListController {
         model.addAttribute("questionList" , questionList );
         model.addAttribute("nowPage" , nowPage );
         model.addAttribute("loginUser" , loginUser );
-        model.addAttribute("kw", kw);
+        model.addAttribute("kw", kw); //검색어
+        model.addAttribute("searchType", searchType); // 셀렉트 박스 파라 미터
+
+
         return "/domain/home/home/list";
     }
 

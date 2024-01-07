@@ -43,17 +43,17 @@ public class QuestionService {
      * 질문 DB 테이블 에 저장되어있는 데이터를 조회
      * 체크박스 에 체크 가 되어 있지 않은 글들만 찾음
      */
-    public Page<Question> getList(int page , String kw , String searchType) {
+    public Page<Question> getList(int page , String kw , String searchType ) {
 
         List<Sort.Order> sorts = new ArrayList<>();
 
-        sorts.add(Sort.Order.desc("createDate"));
+        sorts.add(Sort.Order.desc("createDate")); //최신 날짜 순
 
         Pageable pageable = PageRequest.of( page -1, 10 , Sort.by(sorts)); //페이지 당 글 10개씩 표시 ,최신 날짜순
 
         switch (searchType) {
             case "title":
-                return questionRepository.findByTitleContainingAndIsPublishedFalse(kw, pageable); //셀렉트 박스 에서 제목 이 선택 되고 검색이 되면 실행
+                return questionRepository.findByTitleContainingAndIsPublishedFalse(kw, pageable ); //셀렉트 박스 에서 제목 이 선택 되고 검색이 되면 실행
             case "content":
                 return questionRepository.findByContentContainingAndIsPublishedFalse(kw, pageable); //셀렉트 박스 에서 내용 이 선택 되고 검색이 되면 실행
             case "author":

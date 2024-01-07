@@ -26,8 +26,8 @@ public interface QuestionRepository extends JpaRepository<Question , Long >{
     Page<Question> findByContentContainingAndIsPublishedFalse(String kw , Pageable pageable);
 
     //작성자
-    Page<Question> findByAuthorNicknameContainingAndIsPublishedFalse(String kw , Pageable pageable);
+    Page<Question> findByAuthorNicknameContainingAndIsPublishedFalse(String kw , Pageable pageable );
 
     //글 + 내용
-    Page<Question> findByTitleContainingOrContentContainingAndIsPublishedFalse(String kw, String keyword , Pageable pageable);
+    Page<Question> findByTitleContainingOrContentContainingAndIsPublishedFalse(String kw, String keyword , Pageable pageable );
 }

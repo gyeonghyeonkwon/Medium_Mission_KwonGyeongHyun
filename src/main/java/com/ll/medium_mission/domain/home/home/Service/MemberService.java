@@ -4,7 +4,6 @@ import com.ll.medium_mission.domain.home.home.Entity.MemberUser;
 import com.ll.medium_mission.domain.home.home.Repository.MemberRepository;
 import com.ll.medium_mission.domain.home.home.form.MemberUserCreateForm;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +22,6 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     private final PasswordEncoder passwordEncoder;
-
-    private Session entityManager;
 
 
     /**
