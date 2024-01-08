@@ -41,7 +41,7 @@ public class BoardListController {
          */
         Page<Question> questionList = this.questionService.getList(page , kw , searchType);
         int nowPage = questionList.getPageable().getPageNumber() +1 ; // 페이지 0 을 1로 설정
-        int startPage =  Math.max(1 , nowPage - 4 );
+        int startPage =  Math.max(1 , ((nowPage - 1) / 5 * 5) + 1 );
         int endPage = Math.min(questionList.getTotalPages() , ((nowPage - 1) / 5 + 1) * 5 );
         String loginUser = memberUser.getUsername();
         model.addAttribute("questionList" , questionList );
