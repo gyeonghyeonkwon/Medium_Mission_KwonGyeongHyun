@@ -41,9 +41,13 @@ public class BoardListController {
          */
         Page<Question> questionList = this.questionService.getList(page , kw , searchType);
         int nowPage = questionList.getPageable().getPageNumber() +1 ; // 페이지 0 을 1로 설정
+        int startPage =  Math.max(1 , nowPage - 4 );
+        int endPage = Math.min(questionList.getTotalPages() , ((nowPage - 1) / 5 + 1) * 5 );
         String loginUser = memberUser.getUsername();
         model.addAttribute("questionList" , questionList );
         model.addAttribute("nowPage" , nowPage );
+        model.addAttribute("startPage" , startPage );
+        model.addAttribute("endPage" , endPage );
         model.addAttribute("loginUser" , loginUser );
         model.addAttribute("kw", kw); //검색어
         model.addAttribute("searchType", searchType); // 셀렉트 박스 파라 미터

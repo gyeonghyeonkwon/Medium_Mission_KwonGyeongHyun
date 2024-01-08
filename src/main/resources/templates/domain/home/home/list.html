@@ -40,15 +40,16 @@
         <div th:if="${!questionList.isEmpty()}">
             <ul class="join flex justify-center mt-5">
                 <li class="join-item btn" th:classappend="${!questionList.hasPrevious} ? 'btn-disabled'">
-                    <a class="page-link " href="javascript:void(0)" th:data-page="${nowPage -1}"> « </a> <!-- 이전페이지 -->
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${nowPage -1}"> « </a> <!-- 이전페이지 -->
                 </li>
-                <li th:each="page: ${#numbers.sequence(1, questionList.totalPages)}"
+                <li th:each="page:${#numbers.sequence(((nowPage -1)/ 5 * 5) + 1 , endPage)}"
+
                     th:classappend="${page == nowPage} ? 'btn-active'"
                     class="join-item btn"> <!--현재페이지-->
                     <a th:text="${page}" class="page-link" href="javascript:void(0)" th:data-page="${page}"></a>
                 </li>
                 <li class="join-item btn" th:classappend="${!questionList.hasNext} ? 'btn-disabled'">
-                    <a class="page-link " href="javascript:void(0)" th:data-page="${nowPage +1}">» </a> <!-- 다음페이지 -->
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${nowPage +1}">» </a> <!-- 다음페이지 -->
                 </li>
             </ul>
         </div>
