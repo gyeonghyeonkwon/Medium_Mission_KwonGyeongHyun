@@ -10,6 +10,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class QuestionModifyController {
      * 데이터 베이스에 저장 되어 있는 체크 여부를 불러옴
      */
     @GetMapping("/member/modify/{id}")
-    public String showModify(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm) {
+    public String showModify(@PathVariable("id") Long id, QuestionWriteForm questionWriteForm , Model model) {
 
         Question question = this.questionService.getQuestion(id);
 
@@ -41,6 +42,8 @@ public class QuestionModifyController {
         questionWriteForm.setIsPublished(question.getIsPublished()); // 공개 여부
 
         questionWriteForm.setIsPaid(question.getIsPaid()); //유료 여부
+
+        model.addAttribute("questionWriteForm" , questionWriteForm);
         return "domain/home/home/modify";
 
     }

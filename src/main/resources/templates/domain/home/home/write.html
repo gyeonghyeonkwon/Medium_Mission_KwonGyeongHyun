@@ -2,31 +2,7 @@
 
 <div layout:fragment="content" class="container my-5 mx-auto">
     <th:block th:replace="domain/home/home/global/toastUiEditorLib :: toastUiEditorLib"></th:block>
-    <script>
-        function submitEditForm(form) {
-            form.title.value = form.title.value.trim();
 
-            if (form.title.value.length == 0) {
-                toastWarning('제목을 입력해주세요.');
-                form.title.focus();
-                return;
-            }
-
-            const editor = $(form).find(".toast-ui-editor").data("data-toast-editor");
-
-            const markdown = editor.getMarkdown().trim();
-
-            form.content.value = markdown;
-
-            if (form.content.value.length == 0) {
-                toastWarning("내용을 입력해주세요");
-                editor.focus();
-                return;
-            }
-
-            form.submit();
-        }
-    </script>
 
 
     <div class="container">
@@ -47,7 +23,7 @@
                         <!--ROLE_PAID , ROLE_ADMIN 권한이 존재 하는 회원만 보인다-->
                         <input type="checkbox" id="isPaid" name="isPaid" class="form-check-input">
                         <input type="hidden" name="_isPaid" value="paid">  <!--hidden 과 _isPublished 는 False -->
-                        <label for="isPaid" class="form-check-label">유료 전환</label>
+                        <label for="isPaid" class="form-check-label">유료 글 전환</label>
                     </div>
                 </div>
 
