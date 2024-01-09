@@ -1,4 +1,4 @@
-<html layout:decorate= "~{domain/home/home/layout}">
+<html layout:decorate="~{domain/home/home/layout}">
 
 <div layout:fragment="content" class="container my-5 mx-auto">
     <th:block th:replace="domain/home/home/global/toastUiEditorLib :: toastUiEditorLib"></th:block>
@@ -29,16 +29,31 @@
     </script>
 
 
-
     <div class="container">
 
-        <form th:action="@{/member/write}"  th:object="${questionWriteForm}" method="post" onsubmit="submitEditForm(this); return false;">
+        <form th:action="@{/member/write}" th:object="${questionWriteForm}" method="post"
+              onsubmit="submitEditForm(this); return false;">
             <input type="hidden" name="content"> <!--토스트 UI content-->
 
-            <div class="mb-4 mx-auto max-w-md ">
+            <div class="">
                 <h5 class="text-2xl my-2 border-b pb-2">글 쓰기</h5>
+                <div class="flex space-x-4"><!--div tag 열 배치-->
+                    <div class=" form-check ">
+                        <input type="checkbox" id="isPublished" name="isPublished" class="form-check-input">
+                        <input type="hidden" name="_isPublished" value="secret">  <!--hidden 과 _isPublished 는 False -->
+                        <label for="isPublished" class="form-check-label">비공개</label>
+                    </div>
+                    <div class=" form-check " sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PAID')">
+                        <!--ROLE_PAID , ROLE_ADMIN 권한이 존재 하는 회원만 보인다-->
+                        <input type="checkbox" id="isPaid" name="isPaid" class="form-check-input">
+                        <input type="hidden" name="_isPaid" value="paid">  <!--hidden 과 _isPublished 는 False -->
+                        <label for="isPaid" class="form-check-label">유료 전환</label>
+                    </div>
+                </div>
+
                 <label for="title" class="form-label">제목</label>
-                <input type="text" placeholder="제목을 입력해주세요" name="title" id="title" class="form-control input input-bordered input-secondary w-full mb-4">
+                <input type="text" placeholder="제목을 입력해주세요" name="title" id="title"
+                       class="form-control input input input-bordered w-full  mb-4">
             </div>
             <!--토스트 UI-->
             <div class="toast-ui-editor" height="calc(100vh - 400px)" placeholder="내용">
@@ -47,24 +62,12 @@
 
             </div>
             <!--토스트 끝-->
-            <div class="flex justify-between items-center mb-4 mx-auto max-w-md ">
-            <div>
-                <button  class="btn btn-neutral">등록</button>
+            <div class="my-5">
+                <button class="btn btn-neutral">등록</button>
                 <a href="/member/list" class="btn btn-error ">취소</a>
             </div>
-                    <div class="form-check">
-                        <input type="checkbox" id="isPublished"  name="isPublished" class="form-check-input">
-                        <input type="hidden" name="_isPublished" value="secret">  <!--hidden 과 _isPublished 는 False -->
-                        <label for="isPublished" class="form-check-label">비공개</label>
 
 
-                <div  class="form-check" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PAID')"> <!--ROLE_PAID , ROLE_ADMIN 권한이 존재 하는 회원만 보인다-->
-                <input type="checkbox" id="isPaid"  name="isPaid" class="form-check-input">
-                        <input type="hidden" name="_isPaid" value="paid">  <!--hidden 과 _isPublished 는 False -->
-                        <label for="isPaid" class="form-check-label">유료 전환</label>
-                    </div>
-                    </div>
-            </div>
         </form>
     </div>
 </div>
