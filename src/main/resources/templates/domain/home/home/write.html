@@ -1,24 +1,55 @@
 <html layout:decorate= "~{domain/home/home/layout}">
 
 <div layout:fragment="content" class="container my-5 mx-auto">
+    <th:block th:replace="domain/home/home/global/toastUiEditorLib :: toastUiEditorLib"></th:block>
+    <script>
+        function submitEditForm(form) {
+            form.title.value = form.title.value.trim();
+
+            if (form.title.value.length == 0) {
+                toastWarning('제목을 입력해주세요.');
+                form.title.focus();
+                return;
+            }
+
+            const editor = $(form).find(".toast-ui-editor").data("data-toast-editor");
+
+            const markdown = editor.getMarkdown().trim();
+
+            form.content.value = markdown;
+
+            if (form.content.value.length == 0) {
+                toastWarning("내용을 입력해주세요");
+                editor.focus();
+                return;
+            }
+
+            form.submit();
+        }
+    </script>
+
+
 
     <div class="container">
-        <form th:action="@{/member/write}"  th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">
+
+        <form th:action="@{/member/write}"  th:object="${questionWriteForm}" method="post" onsubmit="submitEditForm(this); return false;">
+            <input type="hidden" name="content"> <!--토스트 UI content-->
 
             <div class="mb-4 mx-auto max-w-md ">
                 <h5 class="text-2xl my-2 border-b pb-2">글 쓰기</h5>
                 <label for="title" class="form-label">제목</label>
                 <input type="text" placeholder="제목을 입력해주세요" name="title" id="title" class="form-control input input-bordered input-secondary w-full mb-4">
             </div>
+            <!--토스트 UI-->
+            <div class="toast-ui-editor" height="calc(100vh - 400px)" placeholder="내용">
 
+                <script type="text/x-template" th:utext="${questionWriteForm.content}"></script>
 
-            <div class="mb-4 mx-auto max-w-md">
-                <label for="content" class="form-label">내용</label>
-                <textarea name="content" id="content" rows="5" placeholder="내용을 입력해주세요" class="form-control textarea textarea-secondary textarea-bordered textarea-lg w-full"></textarea>
             </div>
+            <!--토스트 끝-->
             <div class="flex justify-between items-center mb-4 mx-auto max-w-md ">
             <div>
-                <button class="btn btn-neutral">등록</button>
+                <button  class="btn btn-neutral">등록</button>
                 <a href="/member/list" class="btn btn-error ">취소</a>
             </div>
                     <div class="form-check">
@@ -37,4 +68,6 @@
         </form>
     </div>
 </div>
+
 </html>
+

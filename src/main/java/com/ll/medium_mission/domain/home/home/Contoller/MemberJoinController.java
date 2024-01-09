@@ -27,8 +27,9 @@ public class MemberJoinController {
      */
 
     @GetMapping("/join")
-    public String showJoinPage(MemberUserCreateForm memberUserCreateForm) {
+    public String showJoinPage(MemberUserCreateForm memberUserCreateForm , Model model) {
 
+        model.addAttribute("memberUserCreateForm" , memberUserCreateForm);
         return "domain/home/home/join";
     }
 

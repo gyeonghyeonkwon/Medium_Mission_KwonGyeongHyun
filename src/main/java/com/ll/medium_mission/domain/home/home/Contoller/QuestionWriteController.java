@@ -30,8 +30,9 @@ public class QuestionWriteController {
     private final Rq rq;
 
     @GetMapping("/member/write")
-    public String showWrite(QuestionWriteForm  QuestionWriteForm) {
+    public String showWrite(QuestionWriteForm questionWriteForm , Model model ) {
 
+        model.addAttribute("questionWriteForm" , questionWriteForm);
         return "domain/home/home/write";
     }
 
