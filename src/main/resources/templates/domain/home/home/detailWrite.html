@@ -1,6 +1,7 @@
 <html layout:decorate="~{domain/home/home/layout}">
 
 <div layout:fragment="content" class="container my-5 mx-auto">
+    <th:block th:replace="domain/home/home/global/toastUiEditorLib :: toastUiEditorLib"></th:block>
 
 
     <div class="container">
@@ -40,9 +41,12 @@
         <!--글 내용 -->
         <div class="my-3 pb-3 border-b-2  text-center">
             <div class="p-4 mb-5 text-left whitespace-pre-line">
-                <div class=" font-bold text-lg modal-box" style="color: #dc3545;"  th:if="${isPaidMsg}" th:text="${isPaidMsg}" ></div>
+                <div class=" font-bold text-lg modal-box " style="color: #dc3545;"  th:if="${isPaidMsg}" th:text="${isPaidMsg}" ></div> <!--일반 회원이 유료글 접근 시 실행-->
 
-                <div class="text-gray-800 " th:unless="${isPaidMsg}" th:text="${question.content}"></div>
+                <div class="toast-ui-viewer ">
+                    <script type="text/x-template" th:unless="${isPaidMsg}" th:utext="${question.content}"></script>
+
+                </div>
 
             </div>
         </div>

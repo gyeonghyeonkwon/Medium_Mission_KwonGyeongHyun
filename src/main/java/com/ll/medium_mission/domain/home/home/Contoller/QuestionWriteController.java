@@ -65,7 +65,7 @@ public class QuestionWriteController {
     try {
 
         if (question.getIsPaid() && !memberService.isPaidMember(authentication)) {
-                model.addAttribute("isPaidMsg" , "이 글은 유료 멤버십 전용 입니다. ")    ;
+                model.addAttribute("isPaidMsg" , "이 글은 유료 멤버십 전용 입니다. ");
         }
     }
         catch (NullPointerException e){
