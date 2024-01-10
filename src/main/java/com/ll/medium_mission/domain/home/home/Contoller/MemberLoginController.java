@@ -3,7 +3,6 @@ package com.ll.medium_mission.domain.home.home.Contoller;
 import com.ll.medium_mission.domain.home.home.Service.MemberService;
 import com.ll.medium_mission.global.Rq;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -29,7 +28,7 @@ public class MemberLoginController {
      *  로그인 되면 login 화면으로 넘어갈수없다.
      *  로그인이 되어있는 사용자는 접근 할 수 없다
      */
-    @PreAuthorize("isAnonymous()") //로그인이 되어있지 않는 사용자만이 접속 가능
+//    @PreAuthorize("isAnonymous()") //로그인이 되어있지 않는 사용자만이 접속 가능
     @GetMapping("/member/login")
     public String loginPage() {
 

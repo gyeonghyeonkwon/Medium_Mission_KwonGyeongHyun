@@ -30,7 +30,7 @@ public class SecurityConfig{
                  */
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers( "/member/list" ,"/member/write")
+                        .requestMatchers( "/member/list","/member/write")
                         .authenticated()// 로그인 하지않으면 접근 불가
                         .requestMatchers("/member/admin/**" )
                         .hasRole("ADMIN")
@@ -59,7 +59,15 @@ public class SecurityConfig{
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/login")
                         .usernameParameter("nickname") // 기본 user -> id 로 변경
-                        .defaultSuccessUrl("/member/list"))
+                        .defaultSuccessUrl("/member/list")
+                )
+                // oauth 로그인
+                .oauth2Login(
+                        oauth2Login -> oauth2Login
+                                .loginPage("/member/login")
+                                .defaultSuccessUrl("/member/list")
+
+                )
 
                 /**
                  * 로그아웃 시 로그인페이지 이동
