@@ -60,6 +60,10 @@ public class MemberService {
 
     }
 
+    public Optional<MemberUser> findByNickname(String nickname) {
+        return memberRepository.findByNickname(nickname);
+    }
+
     /**
      *
      * QuestionModifyController 에서 실행
@@ -117,6 +121,17 @@ public class MemberService {
 
         // 멤버 정보가 있고, 유료 멤버십 상태라면 true 반환
         return memberUser != null && memberUser.isPaid();
+    }
+
+    @Transactional
+    public MemberUser whenSocialLogin(String providerTypeCode, String username, String nickname, String profileImgUrl) {
+
+        Optional<MemberUser> OpMember = findByNickname(nickname);
+
+        if (OpMember.isPresent()) {
+           return OpMember.get();
+        }
+            return create(username , nickname , "");
     }
 }
 

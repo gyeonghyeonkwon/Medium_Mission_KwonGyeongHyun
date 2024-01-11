@@ -29,6 +29,7 @@ public class SecurityConfig{
                  *  익명사용자 및 일반사용자는 관리자페이지로 접근하지못한다
                  */
         http
+
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers( "/member/list","/member/write")
                         .authenticated()// 로그인 하지않으면 접근 불가
@@ -88,6 +89,7 @@ public class SecurityConfig{
 
         return http.build();
     }
+
     //패스워드 암호화
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -98,4 +100,5 @@ public class SecurityConfig{
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
 }
