@@ -2,8 +2,12 @@ package com.ll.medium_mission.domain.home.home.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +19,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@SuperBuilder
 public class Question {
 
     @Id
@@ -44,7 +50,7 @@ public class Question {
     @ManyToOne
     private MemberUser author;
 
-    @Column
     private Boolean isPublished;  //boolean 은 맞으나 null 값을 허용 하기 위해 Boolean 으로 작성함
 
+    private Boolean isPaid; //유료 글 여부
 }

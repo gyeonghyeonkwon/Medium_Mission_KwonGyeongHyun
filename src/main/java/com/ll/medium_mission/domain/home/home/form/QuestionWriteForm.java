@@ -2,12 +2,13 @@ package com.ll.medium_mission.domain.home.home.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import org.springframework.validation.annotation.Validated;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-@Validated
 @ToString
 @AllArgsConstructor
 public class QuestionWriteForm {
@@ -22,5 +23,9 @@ public class QuestionWriteForm {
         @Size
         private String content;
 
-        private Boolean  isPublished;
+        private Boolean  isPublished; // 공개 여부
+
+
+        private Boolean isPaid ; //유료 글 여부
+
 }

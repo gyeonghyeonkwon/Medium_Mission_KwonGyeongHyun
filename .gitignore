@@ -36,6 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
+/src/main/generated/
+
 ### CUSTOM ###
 application-secret.yml
 medium_dev.mv.db

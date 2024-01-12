@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+<th:block th:fragment="toastUiEditorLib">
+    <!-- 토스트 에디터에 사용될 새너타이즈 도구 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+
+    <!-- 토스트 UI 에디터 - 코어 -->
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
+
+    <!-- 토스트 UI 에디터 - 한국어 -->
+    <script src="https://uicdn.toast.com/editor/latest/i18n/ko-kr.js"></script>
+
+    <!-- 토스트 UI 차트 - 코어 -->
+    <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.css">
+    <script src="https://uicdn.toast.com/chart/latest/toastui-chart.js"></script>
+
+    <!-- 토스트 UI 에디터 - 토스트 UI 차트를 에디터에 연결 -->
+    <script src="https://uicdn.toast.com/editor-plugin-chart/latest/toastui-editor-plugin-chart.min.js"></script>
+
+    <!-- 코드 신택스 하이라이터, 프리즈마의 기본 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+
+    <!-- 토스트 UI 에디터 - 코드 신택스 하이라이터 -->
+    <link rel="stylesheet"
+          href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css">
+    <!-- 프리즈마 JS가 아래 스크립트에 내장되어 있음 -->
+    <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+
+    <!-- 토스트 UI 에디터 - UML 플러그인 -->
+    <script src="https://uicdn.toast.com/editor-plugin-uml/latest/toastui-editor-plugin-uml.min.js"></script>
+
+    <!-- 토스트 UI 컬러피커 -->
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.css"/>
+    <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.js"></script>
+
+    <!-- 토스트 UI 컬러피커를 토스트 UI 에디터에 연결 -->
+    <link rel="stylesheet"
+          href="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.css"/>
+    <script
+            src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+    <!-- 토스트 UI 에디터 플러그인, 테이블 셀 병합 -->
+    <script
+            src="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.js"></script>
+
+    <!-- 수학수식 표현 라이브러리 katex -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.13/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.13/katex.min.css">
+
+    <style>
+        /* 토스트 UI, 유튜브 플러그인에서 사용하는 CSS 시작 */
+        .ratio-16\/9::after {
+            content: "";
+            display: block;
+            padding-top: calc(100% / 16 * 9);
+        }
+
+        .ratio-9\/16::after {
+            content: "";
+            display: block;
+            padding-top: calc(100% / 9 * 16);
+        }
+    </style>
+
+    <script>
+        function getUriParams(uri) {
+            uri = uri.trim();
+            uri = uri.replaceAll("&amp;", "&");
+            if (uri.indexOf("#") !== -1) {
+                let pos = uri.indexOf("#");
+                uri = uri.substring(0, pos);
+            }
+
+            let params = {};
+
+            uri.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+                params[key] = value;
+            });
+
+            return params;
+        }
+
+        function codepenPlugin() {
+            const toHTMLRenderers = {
+                codepen(node) {
+                    const html = renderCodepen(node.literal);
+
+                    return [
+                        {type: "openTag", tagName: "div", outerNewLine: true},
+                        {type: "html", content: html},
+                        {type: "closeTag", tagName: "div", outerNewLine: true},
+                    ];
+                },
+            };
+
+            function renderCodepen(uri) {
+                let uriParams = getUriParams(uri);
+
+                let height = 400;
+
+                let preview = "";
+
+                if (uriParams.height) {
+                    height = uriParams.height;
+                }
+
+                let width = "100%";
+
+                if (uriParams.width) {
+                    width = uriParams.width;
+                }
+
+                if (!isNaN(width)) {
+                    width += "px";
+                }
+
+                let iframeUri = uri;
+
+                if (iframeUri.indexOf("#") !== -1) {
+                    let pos = iframeUri.indexOf("#");
+                    iframeUri = iframeUri.substr(0, pos);
+                }
+
+                return (
+                    '<iframe height="' +
+                    height +
+                    '" style="width: ' +
+                    width +
+                    ';" title="" src="' +
+                    iframeUri +
+                    '" allowtransparency="true" allowfullscreen="true"></iframe>'
+                );
+            }
+
+            return {toHTMLRenderers};
+        }
+
+        function replPlugin() {
+            const toHTMLRenderers = {
+                repl(node) {
+                    const html = renderRepl(node.literal);
+
+                    return [
+                        {type: "openTag", tagName: "div", outerNewLine: true},
+                        {type: "html", content: html},
+                        {type: "closeTag", tagName: "div", outerNewLine: true},
+                    ];
+                },
+            };
+
+            function renderRepl(uri) {
+                var uriParams = getUriParams(uri);
+
+                var height = 400;
+
+                if (uriParams.height) {
+                    height = uriParams.height;
+                }
+
+                return (
+                    '<iframe width="100%" height="' +
+                    height +
+                    'px" src="' +
+                    uri +
+                    '"></iframe>'
+                );
+            }
+
+            return {toHTMLRenderers};
+        }
+
+        function youtubePlugin() {
+            const toHTMLRenderers = {
+                youtube(node) {
+                    const html = renderYoutube(node.literal);
+
+                    return [
+                        {type: "openTag", tagName: "div", outerNewLine: true},
+                        {type: "html", content: html},
+                        {type: "closeTag", tagName: "div", outerNewLine: true},
+                    ];
+                },
+            };
+
+            function renderYoutube(uri) {
+                uri = uri.replace("https://www.youtube.com/watch?v=", "");
+                uri = uri.replace("http://www.youtube.com/watch?v=", "");
+                uri = uri.replace("www.youtube.com/watch?v=", "");
+                uri = uri.replace("youtube.com/watch?v=", "");
+                uri = uri.replace("https://youtu.be/", "");
+                uri = uri.replace("http://youtu.be/", "");
+                uri = uri.replace("youtu.be/", "");
+
+                let uriParams = getUriParams(uri);
+
+                let width = "100%";
+                let height = "100%";
+
+                let maxWidth = 500;
+
+                if (!uriParams["max-width"] && uriParams["ratio"] == "9/16") {
+                    uriParams["max-width"] = 300;
+                }
+
+                if (uriParams["max-width"]) {
+                    maxWidth = uriParams["max-width"];
+                }
+
+                let ratio = "16/9";
+
+                if (uriParams["ratio"]) {
+                    ratio = uriParams["ratio"];
+                }
+
+                let marginLeft = "auto";
+
+                if (uriParams["margin-left"]) {
+                    marginLeft = uriParams["margin-left"];
+                }
+
+                let marginRight = "auto";
+
+                if (uriParams["margin-right"]) {
+                    marginRight = uriParams["margin-right"];
+                }
+
+                let youtubeId = uri;
+
+                if (youtubeId.indexOf("?") !== -1) {
+                    let pos = uri.indexOf("?");
+                    youtubeId = youtubeId.substr(0, pos);
+                }
+
+                return (
+                    '<div style="max-width:' +
+                    maxWidth +
+                    "px; margin-left:" +
+                    marginLeft +
+                    "; margin-right:" +
+                    marginRight +
+                    ';" class="ratio-' +
+                    ratio +
+                    ' relative"><iframe class="absolute top-0 left-0 w-full" width="' +
+                    width +
+                    '" height="' +
+                    height +
+                    '" src="https://www.youtube.com/embed/' +
+                    youtubeId +
+                    '" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+                );
+            }
+
+            return {toHTMLRenderers};
+        }
+
+        function katexPlugin() {
+            const toHTMLRenderers = {
+                katex(node) {
+                    let html = katex.renderToString(node.literal, {
+                        throwOnError: false,
+                    });
+
+                    return [
+                        {type: "openTag", tagName: "div", outerNewLine: true},
+                        {type: "html", content: html},
+                        {type: "closeTag", tagName: "div", outerNewLine: true},
+                    ];
+                },
+            };
+
+            return {toHTMLRenderers};
+        }
+
+        const ToastEditor__chartOptions = {
+            minWidth: 100,
+            maxWidth: 600,
+            minHeight: 100,
+            maxHeight: 300,
+        };
+
+        function configPlugin() {
+            const toHTMLRenderers = {
+                config(node) {
+                    return [
+                        {type: "openTag", tagName: "div", outerNewLine: true},
+                        {type: "html", content: ""},
+                        {type: "closeTag", tagName: "div", outerNewLine: true},
+                    ];
+                },
+            };
+
+            return {toHTMLRenderers};
+        }
+
+        function hidePlugin() {
+            const toHTMLRenderers = {
+                hide(node) {
+                    return [
+                        {type: "openTag", tagName: "div", outerNewLine: true},
+                        {type: "html", content: ""},
+                        {type: "closeTag", tagName: "div", outerNewLine: true},
+                    ];
+                },
+            };
+
+            return {toHTMLRenderers};
+        }
+
+        function ToastEditor__escape(origin) {
+            return origin
+                .replaceAll("<t-script", "<script")
+                .replaceAll("</t-script", "</script");
+        }
+
+        const ToastEditor__initialSource = ``.trim();
+
+        function ToastEditor__init() {
+            $(".toast-ui-editor").each(function (index, node) {
+                const $node = $(node);
+                const $initialValueEl = $node.find(" > script");
+                const initialValue =
+                    $initialValueEl.length == 0
+                        ? ToastEditor__initialSource
+                        : ToastEditor__escape($initialValueEl.html().trim());
+
+                const editor = new toastui.Editor({
+                    el: node,
+                    customHTMLRenderer: {
+                        heading(node, {entering, getChildrenText}) {
+                            return {
+                                type: entering ? 'openTag' : 'closeTag',
+                                tagName: `h${node.level}`,
+                                attributes: {
+                                    id: getChildrenText(node).trim()
+                                }
+                            }
+                        },
+                    },
+                    previewStyle: $node.attr('preview-style') ?? "vertical",
+                    initialValue: initialValue,
+                    height: $node.attr('height') ?? "100%",
+                    language: "ko-KR",
+                    useCommandShortcut: false,
+                    events: {
+                        keydown: function (mode, event) {
+                            if (event.isComposing == false && event.isTrusted) {
+                                if (event.ctrlKey && event.shiftKey && (event.key == 'z' || event.key == 'Z')) {
+                                    // 윈도우 : Ctrl + Shift + z 를 누르면 redo
+                                    editor.exec("redo");
+                                    return false;
+                                } else if (event.metaKey && event.shiftKey && (event.key == 'z' || event.key == 'Z')) {
+                                    // MAC : Cmd + Shift + z 를 누르면 redo
+                                    editor.exec("redo");
+                                    return false;
+                                } else if (event.ctrlKey && event.key == 'y') {
+                                    // 윈도우 : Ctrl + y 를 누르면 redo
+                                    editor.exec("redo");
+                                    return false;
+                                } else if (event.metaKey && event.key == 'y') {
+                                    // MAC : Cmd + y 를 누르면 redo
+                                    editor.exec("redo");
+                                    return false;
+                                } else if (event.ctrlKey && event.key == 'z') {
+                                    // 윈도우 : Ctrl + z 를 누르면 undo
+                                    editor.exec("undo");
+                                    return false;
+                                } else if (event.metaKey && event.key == 'z') {
+                                    // MAC : Cmd + z 를 누르면 undo
+                                    editor.exec("undo");
+                                    return false;
+                                }
+                            }
+                        }
+                    },
+                    hooks: {
+                        addImageBlobHook: function (blob, callback) {
+                            const csrfToken = $("meta[name='_csrf']").attr("content");
+                            const csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+                            const formData = new FormData();
+                            formData.append('file', blob);
+
+                            fetch('/genFile/temp', {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    [csrfHeader]: csrfToken
+                                },
+                                body: formData
+                            }).then(function (response) {
+                                return response.json();
+                            }).then(function (myJson) {
+                                callback(myJson.data + "?type=temp");
+                            });
+                        }
+                    },
+                    placeholder: $node.attr('placeholder') ?? "Please enter text.",
+                    autofocus: $node.attr('autofocus') == 'autofocus',
+                    plugins: [
+                        [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
+                        [toastui.Editor.plugin.codeSyntaxHighlight, {highlighter: Prism}],
+                        toastui.Editor.plugin.colorSyntax,
+                        toastui.Editor.plugin.tableMergedCell,
+                        [toastui.Editor.plugin.uml, {rendererURL: 'http://www.plantuml.com/plantuml/svg/'}],
+                        katexPlugin,
+                        youtubePlugin,
+                        codepenPlugin,
+                        replPlugin,
+                        configPlugin,
+                        hidePlugin,
+                    ],
+                    customHTMLSanitizer: (html) => {
+                        return (
+                            DOMPurify.sanitize(html, {
+                                ADD_TAGS: ["iframe"],
+                                ADD_ATTR: [
+                                    "width",
+                                    "height",
+                                    "allow",
+                                    "allowfullscreen",
+                                    "frameborder",
+                                    "scrolling",
+                                    "style",
+                                    "title",
+                                    "loading",
+                                    "allowtransparency",
+                                ],
+                            }) || ""
+                        );
+                    },
+                });
+
+                $node.data("data-toast-editor", editor);
+            });
+        }
+
+        function ToastEditorView__init() {
+            $(".toast-ui-viewer").each(function (index, node) {
+                const $node = $(node);
+                const $initialValueEl = $node.find(" > script");
+                const initialValue =
+                    $initialValueEl.length == 0
+                        ? ""
+                        : ToastEditor__escape($initialValueEl.html().trim());
+                $node.empty();
+
+                const viewer = new toastui.Editor.factory({
+                    el: node,
+                    customHTMLRenderer: {
+                        heading(node, {entering, getChildrenText}) {
+                            return {
+                                type: entering ? 'openTag' : 'closeTag',
+                                tagName: `h${node.level}`,
+                                attributes: {
+                                    id: getChildrenText(node).trim()
+                                }
+                            }
+                        },
+                    },
+                    initialValue: initialValue,
+                    viewer: true,
+                    plugins: [
+                        [toastui.Editor.plugin.chart, ToastEditor__chartOptions],
+                        [toastui.Editor.plugin.codeSyntaxHighlight, {highlighter: Prism}],
+                        toastui.Editor.plugin.colorSyntax,
+                        toastui.Editor.plugin.tableMergedCell,
+                        [toastui.Editor.plugin.uml, {rendererURL: 'http://www.plantuml.com/plantuml/svg/'}],
+                        katexPlugin,
+                        youtubePlugin,
+                        codepenPlugin,
+                        replPlugin,
+                        configPlugin,
+                        hidePlugin,
+                    ],
+                    customHTMLSanitizer: (html) => {
+                        return (
+                            DOMPurify.sanitize(html, {
+                                ADD_TAGS: ["iframe"],
+                                ADD_ATTR: [
+                                    "width",
+                                    "height",
+                                    "allow",
+                                    "allowfullscreen",
+                                    "frameborder",
+                                    "scrolling",
+                                    "style",
+                                    "title",
+                                    "loading",
+                                    "allowtransparency",
+                                ],
+                            }) || ""
+                        );
+                    },
+                });
+
+                $node.data("data-toast-editor", viewer);
+            });
+        }
+
+        $(function () {
+            ToastEditor__init();
+            ToastEditorView__init();
+        })
+
+    </script>
+</th:block>
+
+</body>
+</html>

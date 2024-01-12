@@ -1,37 +1,53 @@
-<html layout:decorate= "~{domain/home/home/layout}">
+<html layout:decorate="~{domain/home/home/layout}">
 
 <div layout:fragment="content" class="container my-5 mx-auto">
+    <th:block th:replace="domain/home/home/global/toastUiEditorLib :: toastUiEditorLib"></th:block>
+
+
 
     <div class="container">
 
-        <!--    <form th:action="@{/member/write}" th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">-->
-        <form th:action="@{/member/write}"  th:object="${QuestionWriteForm}" method="post" onsubmit="submitWriteForm(this); return false;">
+        <form th:action="@{/member/write}" th:object="${questionWriteForm}" method="post"
+              onsubmit="submitEditForm(this); return false;">
+            <input type="hidden" name="content"> <!--토스트 UI content-->
 
-            <div class="mb-4 mx-auto max-w-md ">
+            <div class="">
                 <h5 class="text-2xl my-2 border-b pb-2">글 쓰기</h5>
-                <label for="title" class="form-label">제목</label>
-                <input type="text" placeholder="제목을 입력해주세요" name="title" id="title" class="form-control input input-bordered input-secondary w-full mb-4">
-            </div>
-
-
-            <div class="mb-4 mx-auto max-w-md">
-                <label for="content" class="form-label">내용</label>
-                <textarea name="content" id="content" rows="5" placeholder="내용을 입력해주세요" class="form-control textarea textarea-secondary textarea-bordered textarea-lg w-full"></textarea>
-            </div>
-            <div class="flex justify-between items-center mb-4 mx-auto max-w-md ">
-            <div>
-                <input type="submit" value="등록" class="btn btn-success">
-                <a href="/member/list" class="btn btn-error ">취소</a>
-            </div>
-                <div> <!--체크 박스 True /false-->
-                    <div class="form-check">
-                        <input type="checkbox" id="isPublished"  name="isPublished" class="form-check-input">
-                        <input type="hidden" name="_isPublished" value="on">  <!--hidden 과 _isPublished 는 False -->
+                <div class="flex space-x-4"><!--div tag 열 배치-->
+                    <div class=" form-check ">
+                        <input type="checkbox" id="isPublished" name="isPublished" class="form-check-input">
+                        <input type="hidden" name="_isPublished" value="secret">  <!--hidden 과 _isPublished 는 False -->
                         <label for="isPublished" class="form-check-label">비공개</label>
                     </div>
+                    <div class=" form-check " sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_PAID')">
+                        <!--ROLE_PAID , ROLE_ADMIN 권한이 존재 하는 회원만 보인다-->
+                        <input type="checkbox" id="isPaid" name="isPaid" class="form-check-input">
+                        <input type="hidden" name="_isPaid" value="paid">  <!--hidden 과 _isPublished 는 False -->
+                        <label for="isPaid" class="form-check-label">유료 글 전환</label>
+                    </div>
                 </div>
+
+                <label for="title" class="form-label">제목</label>
+                <input type="text" placeholder="제목을 입력해주세요" name="title" id="title"
+                       class="form-control input input input-bordered w-full  mb-4">
             </div>
+            <!--토스트 UI-->
+            <div class="toast-ui-editor" height="calc(100vh - 400px)" placeholder="내용">
+
+                <script type="text/x-template" th:utext="${questionWriteForm.content}"></script>
+
+            </div>
+            <!--토스트 끝-->
+            <div class="my-5">
+                <button class="btn btn-neutral">등록</button>
+                <a href="/member/list" class="btn btn-error ">취소</a>
+            </div>
+
+
         </form>
+
     </div>
 </div>
+
 </html>
+

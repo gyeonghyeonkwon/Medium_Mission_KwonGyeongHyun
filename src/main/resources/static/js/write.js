@@ -1,27 +1,23 @@
-function submitWriteForm(form) {
-    const inputTitle = form.title;
-    const inputContent = form.content;
+    function submitEditForm(form) {
+    form.title.value = form.title.value.trim();
 
-    inputTitle.value = inputTitle.value.trim();
-    inputContent.value = inputContent.value.trim();
+    if (form.title.value.length == 0) {
+    toastWarning('제목을 입력해주세요.');
+    form.title.focus();
+    return;
+}
 
-    const title = inputTitle.value;
-    const content = inputContent.value;
+    const editor = $(form).find(".toast-ui-editor").data("data-toast-editor");
 
-    if (title.length == 0) {
-        toastWarning('제목을 입력해주세요.');
-        inputTitle.focus();
+    const markdown = editor.getMarkdown().trim();
 
-        return;
-    }
+    form.content.value = markdown;
 
-    if (content.length == 0) {
-        toastWarning('내용을 입력해주세요.');
-        inputContent.focus();
-
-        return;
-    }
-
+    if (form.content.value.length == 0) {
+    toastWarning("내용을 입력해주세요");
+    editor.focus();
+    return;
+}
 
     form.submit();
 }

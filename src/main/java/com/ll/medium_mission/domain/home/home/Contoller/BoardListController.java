@@ -28,8 +28,10 @@ public class BoardListController {
     /**
      *
      */
+
     @GetMapping("/member/list")
-    public String showList(Model model , MemberUser memberUser , @RequestParam(value = "page" , defaultValue = "1") int page) {
+    public String showList(Model model , MemberUser memberUser , @RequestParam(value = "page" , defaultValue = "1") int page ,
+                           @RequestParam(value = "kw", defaultValue = "") String kw , @RequestParam (name = "searchType" , defaultValue = "title") String searchType ){
         /**
          * 게시글 리스트
          * 질문 DB 테이블 에 저장 되어 있는 데이터를 조회 하여 뷰로 전달.
@@ -37,16 +39,20 @@ public class BoardListController {
          * 엔티티 id 값을 엔티티의 이름을 알아내어 뷰로 전달
          *
          */
-
-        Page<Question> questionList = this.questionService.getList(page);
-
+        Page<Question> questionList = this.questionService.getList(page , kw , searchType);
         int nowPage = questionList.getPageable().getPageNumber() +1 ; // 페이지 0 을 1로 설정
-
+        int startPage =  Math.max(1 , ((nowPage - 1) / 5 * 5) + 1 );
+        int endPage = Math.min(questionList.getTotalPages() , ((nowPage - 1) / 5 + 1) * 5 );
         String loginUser = memberUser.getUsername();
-
         model.addAttribute("questionList" , questionList );
         model.addAttribute("nowPage" , nowPage );
+        model.addAttribute("startPage" , startPage );
+        model.addAttribute("endPage" , endPage );
         model.addAttribute("loginUser" , loginUser );
+        model.addAttribute("kw", kw); //검색어
+        model.addAttribute("searchType", searchType); // 셀렉트 박스 파라 미터
+
+
         return "/domain/home/home/list";
     }
 
@@ -56,7 +62,7 @@ public class BoardListController {
      *  자신의 계정이 아니면 게시글을 볼수 없다.
      */
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()") //로그인 사용자
     @GetMapping("/member/myList")
     public String showMyList(Model model , Principal principal) {
 
